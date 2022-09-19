@@ -1,8 +1,8 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    3B
 //
 //  CLASS:       ICS 212
 //
@@ -10,14 +10,20 @@
 //
 //  DATE:        September 3, 2112
 //
-//  FILE:        template.h
+//  FILE:        database.h
 //
 //  DESCRIPTION:
 //   Describe the file
 //
 //  REFERENCES:
-//   List references used here 
+//              secton 4.4
 //
 ****************************************************************/
 
-*** the contents of your header file starts here ***
+void addRecord (struct record **, int, char [ ],char [ ]);
+
+void printAllRecords(struct record *);
+
+int findRecord (struct record *, int);
+
+int deleteRecord(struct record **, int);

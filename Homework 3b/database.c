@@ -1,8 +1,8 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    3B
 //
 //  CLASS:       ICS 212
 //
@@ -10,7 +10,7 @@
 //
 //  DATE:        September 3, 2112
 //
-//  FILE:        template.c
+//  FILE:        database.c
 //
 //  DESCRIPTION:
 //   Describe the file
@@ -20,9 +20,8 @@
 //
 ****************************************************************/
 
-*** include necessary header files for this source file ***
-
-*** if you need, you can have function prototypes here ***
+#include "database.h"
+#include "record.h"
 
 /*****************************************************************
 //
@@ -42,25 +41,88 @@
 
 int main(int argc, char* argv[])
 {
-    ...
+    
 }
 
 /*****************************************************************
 //
-//  Function name: foo
+//  Function name: addRecord
 //
-//  DESCRIPTION:   A template function
-//                 This function does not do anything.
-//                 Please describe your function correctly.
+//  DESCRIPTION:   Don't forget to describe what your main
+//                 function does.
 //
-//  Parameters:    bar (int) : Describe the meaning
+//  Parameters:    struct record ** : 
+//                 int : 
+//                 char [ ] :
+//                 char [ ] : 
+//
+//  Return values:  void
+//
+****************************************************************/
+
+void addRecord ()
+{
+
+}
+
+/*****************************************************************
+//
+//  Function name: printAllRecords
+//
+//  DESCRIPTION:   Don't forget to describe what your main
+//                 function does.
+//
+//  Parameters:    struct record * : 
+//
+//  Return values:  void
+//
+****************************************************************/
+
+void printAllRecords()
+{
+
+}
+
+/*****************************************************************
+//
+//  Function name: findRecord
+//
+//  DESCRIPTION:   Don't forget to describe what your main
+//                 function does.
+//
+//  Parameters:    struct record * : 
+//                 int : 
 //
 //  Return values:  0 : some meaning
 //                 -1 : some meaning
 //
 ****************************************************************/
 
-int foo(int bar)
+int findRecord ()
 {
-    ...
+
+    return 1;
+
+}
+
+/*****************************************************************
+//
+//  Function name: deleteRecord
+//
+//  DESCRIPTION:   Don't forget to describe what your main
+//                 function does.
+//
+//  Parameters:    struct record ** :
+//                 int :
+//
+//  Return values:  0 : some meaning
+//                 -1 : some meaning
+//
+****************************************************************/
+
+int deleteRecord()
+{
+
+    return 2;
+
 }

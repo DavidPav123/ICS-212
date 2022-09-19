@@ -1,8 +1,8 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    3B
 //
 //  CLASS:       ICS 212
 //
@@ -10,7 +10,7 @@
 //
 //  DATE:        September 3, 2112
 //
-//  FILE:        template.c
+//  FILE:        user_interface.c
 //
 //  DESCRIPTION:
 //   Describe the file
@@ -20,9 +20,7 @@
 //
 ****************************************************************/
 
-*** include necessary header files for this source file ***
-
-*** if you need, you can have function prototypes here ***
+#include <stdio.h>
 
 /*****************************************************************
 //
@@ -42,7 +40,11 @@
 
 int main(int argc, char* argv[])
 {
-    ...
+    struct record * start = NULL;
+
+    while(true){
+
+    }
 }
 
 /*****************************************************************

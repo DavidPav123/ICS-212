@@ -1,8 +1,8 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    3B
 //
 //  CLASS:       ICS 212
 //
@@ -10,14 +10,20 @@
 //
 //  DATE:        September 3, 2112
 //
-//  FILE:        template.h
+//  FILE:        record.h
 //
 //  DESCRIPTION:
 //   Describe the file
 //
 //  REFERENCES:
-//   List references used here 
+//               homework 3B website
 //
 ****************************************************************/
 
-*** the contents of your header file starts here ***;
+struct record
+{
+    int                accountno;
+    char               name[30];
+    char               address[60];
+    struct record*     next;
+};
