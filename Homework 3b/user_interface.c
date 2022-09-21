@@ -21,6 +21,7 @@
 ****************************************************************/
 
 #include <stdio.h>
+#include "database.h"
 
 /*****************************************************************
 //
@@ -41,28 +42,47 @@
 int main(int argc, char* argv[])
 {
     struct record * start = NULL;
+    char input;
+    int option, accountNum, whileLoop;
 
-    while(true){
+    whileLoop = 1;
 
+    printf("Here is the introduction text");
+    printf("Here is the desription text");
+
+    while(whileLoop == 1)
+    {
+
+        scanf("%c", &input);
+        printf("%c",input);
+
+        if ( option == 1) 
+        {
+            //addRecord();
+        }
+        else if (option == 2) 
+        {
+            printAllRecords(start);
+        }
+        else if (option == 3) 
+        {
+            scanf("%d", &accountNum);
+
+            findRecord(start, accountNum);
+        }
+        else if ( option == 4 ) 
+        {
+            scanf("%d", &accountNum);
+
+            deleteRecord(start, accountNum);
+        }
+        else if (option == 5) 
+        {
+            whileLoop = 0;
+        }
+        else 
+        {
+            printf("Unknow option, please enter a valid option");
+        }
     }
-}
-
-/*****************************************************************
-//
-//  Function name: foo
-//
-//  DESCRIPTION:   A template function
-//                 This function does not do anything.
-//                 Please describe your function correctly.
-//
-//  Parameters:    bar (int) : Describe the meaning
-//
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
-//
-****************************************************************/
-
-int foo(int bar)
-{
-    ...
 }
