@@ -8,15 +8,15 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        September 24th, 2022
 //
 //  FILE:        record.h
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Holds the defintion for the record struct
 //
 //  REFERENCES:
-//               homework 3B website
+//   Homework 3B website
 //
 ****************************************************************/
 

@@ -8,101 +8,100 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        September 24th, 2022
 //
 //  FILE:        database.c
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Holds the function definitions for the database functions
+//   called by the user interface
 //
 //  REFERENCES:
-//   List references used here 
+//   Textbook section 4.5
 //
 ****************************************************************/
 
-#include "database.h"
+#include <stdio.h>
 #include "record.h"
 
-/*****************************************************************
-//
-//  Function name: main
-//
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
-//
-//  Parameters:    argc (int) : The number of elements in argv
-//                 argv (char*[]) : An array of arguments passed
-//                                  to the program.
-//
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
-//
-****************************************************************/
-
-int main(int argc, char* argv[])
-{
-    
-}
+extern int debugmode;
 
 /*****************************************************************
 //
 //  Function name: addRecord
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Adds a record to the databse
 //
-//  Parameters:    struct record ** : 
-//                 int : 
-//                 char [ ] :
-//                 char [ ] : 
+//  Parameters:    database (struct record **): a pointer to a database record pointer
+//                 accountNumber (int) : an integer holding an account number
+//                 address (char *) : a pointer to a character array holding an address
+//                 name (char *) : a pointer to a character array holding an account name
 //
 //  Return values:  void
 //
 ****************************************************************/
 
-void addRecord ()
+void addRecord(struct record * database, int accountNumber, char * name, char * address)
 {
-
+    if (debugmode == 1)
+    {
+        printf("Name of called function: addRecord\n");
+        printf("Paramaters: struct record * database, int accountNumber, "
+        "char * name, and char * address, with values:\n");
+        printf("accountNumber: ");
+        printf("%d\n", accountNumber);
+        printf("name: ");
+        printf("%s\n", name);
+        printf("address: ");
+        printf("%s\n\n", address);
+    }
 }
 
 /*****************************************************************
 //
 //  Function name: printAllRecords
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   prints all records in the database
 //
-//  Parameters:    struct record * : 
+//  Parameters:    database (struct record *) : a pointer to a database
 //
 //  Return values:  void
 //
 ****************************************************************/
 
-void printAllRecords()
+void printAllRecords(struct record * database)
 {
-
+    if (debugmode == 1)
+    {
+        printf("Name of called function: printAllRecords\n");
+        printf("Paramaters: struct record * database\n\n");
+    }
 }
 
 /*****************************************************************
 //
 //  Function name: findRecord
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Finds record that matchs specified account number
 //
-//  Parameters:    struct record * : 
-//                 int : 
+//  Parameters:    database (struct record *) : a pointer to a database
+//                 accountNumber (int) : an account number 
 //
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
+//  Return values:  1 : function ran
 //
 ****************************************************************/
 
-int findRecord ()
+int findRecord(struct record * database, int accountNumber)
 {
+    if (debugmode == 1)
+    {
+        printf("Name of called function: findRecord\n");
+        printf("Paramaters: struct record * database and int accountNumber, "
+        "with accountNumber value: ");
+        printf("%d\n\n", accountNumber);
+    }
 
     return 1;
-
 }
 
 /*****************************************************************
@@ -112,17 +111,21 @@ int findRecord ()
 //  DESCRIPTION:   Don't forget to describe what your main
 //                 function does.
 //
-//  Parameters:    struct record ** :
-//                 int :
+//  Parameters:    database (struct record *) : a pointer to a database
+//                 accountNumber (int) : an account number 
 //
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
+//  Return values:  1 : function ran
 //
 ****************************************************************/
 
-int deleteRecord()
+int deleteRecord(struct record * database, int accountNumber)
 {
-
-    return 2;
-
+    if (debugmode == 1)
+    {
+        printf("Name of called function: deleteRecord\n");
+        printf("Paramaters: struct record * database and int accountNumber, "
+        "with accountNumber value: ");
+        printf("%d\n\n", accountNumber);
+    }
+    return 1;
 }

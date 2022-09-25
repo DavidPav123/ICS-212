@@ -73,7 +73,7 @@ int user_interface()
 
     while (1 == 1)
     {
-        if (scanf("%d", &input) != 1)
+        if (scanf(" %d", &input) != 1)
         {
             while (getchar() != '\n');
             printf("Input was not a number. Please enter a positive Integer.\n\n"

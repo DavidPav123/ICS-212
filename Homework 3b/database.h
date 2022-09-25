@@ -8,22 +8,24 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        September 24th, 2022
 //
 //  FILE:        database.h
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Holds the function prototypes for the database functions
 //
 //  REFERENCES:
-//              secton 4.4
+//   Homework 3B website, textbook section 4.5
 //
 ****************************************************************/
 
-void addRecord (struct record **, int, char [ ],char [ ]);
+#include "record.h"
+
+void addRecord(struct record **, int, char[ ], char[ ]);
 
 void printAllRecords(struct record *);
 
-int findRecord (struct record *, int);
+int findRecord(struct record *, int);
 
 int deleteRecord(struct record **, int);
