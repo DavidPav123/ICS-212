@@ -1,0 +1,63 @@
+--------------------------------------------------------------------------------
+addRecord
+
+*** Assume the following variables are already defined. ***
+
+- start: The pointer to the first record of the list (or NULL)
+- uaccountno: The user's account number (integer)
+- uname: a character array containing the user's name
+- uaddress: a character array containing the user's address
+--------------------------------------------------------------------------------
+
+define a pointer to record called temp
+define a pointer to record called tempNext
+define a pointer to record called tempNextNext
+define a pointer to record called uacc
+
+allocate a heap space and store its address into uacc
+
+copy from uaccountno to accountno in the record whose address is in uacc
+copy from uname to name in the record whose address is in uacc
+copy from uaddress to address in the record whose address is in uacc
+
+define an int called tempNextAccNum
+
+if( start == NULL )
+	copy from NULL to next in the record whose address is in uacc
+	start = uacc
+
+else
+	copy from start to temp
+	copy from next in the record whose address is in start to tempNext
+	copy from accountno in the record whose address is in start to tempNextAccNum
+
+	if ( uaccountno >  tempNextAccNum)
+		copy from temp to next in the record whos address is in uacc
+		copy from uacc to start
+
+	else if ( tempNext == NULL )
+		copy from uacc to next in the record whos address is in start
+		copy from NULL to next in the record whos address is in uacc
+
+	else
+		copy from next in the record whos address is in tempNext to tempNextNext
+		copy from accountno in the record whose address is in tempNext to tempNextAccNum
+
+		while ( uaccountno < tempNextAccNum && tempNextNext != NULL)
+			copy from next in the record whose address is in temp to temp
+			copy from next in the record whose address is in tempNext to tempNext
+			copy from next in the record whose address is in tempNextNext to tempNextNext
+			copy from accountno in the record whose address is in tempNext to tempNextAccNum
+
+		if ( uaccountno > tempNextAccNum )
+			copy from uacc to next in the record whos address is in temp
+			copy from tempNext to next in the record whos address is in uacc
+		
+		else
+			copy from uacc to next in the record whos address is in tempNext
+			copy from NULL to next in the record whos address is in uacc
+	
+		
+
+	
+    

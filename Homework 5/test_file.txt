@@ -1,0 +1,10 @@
+4
+Charmander
+27
+Squirtle
+100
+Bulbasaur
+86
+Hitmonchamp
+16
+Turtwig
