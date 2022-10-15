@@ -1,0 +1,66 @@
+-----------------------------------
+deleteRecord
+
+- start: The pointer to the first record of the list (or NULL)
+- uaccountno: The user's account number (integer)
+-----------------------------------
+
+define a pointer to record called temp
+define a pointer to record called tempNext
+define a pointer to record called tempNextNext
+
+define an int called tempNextAccNum
+define an int called returnVal
+
+copy from -1 to returnVal
+
+if( start == NULL )
+    copy from -1 to returnVal
+
+else
+	copy from start to temp
+	copy from next in the record whose address is in start to tempNext
+	copy from accountno in the record whose address is in start to tempNextAccNum
+
+	if ( tempNextAccNum == uaccountno )
+		if ( tempNext == NULL )
+            start == NULL
+			copy from 0 to returnVal
+        
+        else
+            while ( tempNextAccNum == accountno  && temp != NULL)
+                copy from next in the record whose address is in temp to temp
+			    copy from accountno in the record whose address is in temp to tempNextAccNum
+
+            copy from temp to start
+			copy from 0 to returnVal
+
+    else
+		copy from accountno in the record whose address is in tempNext to tempNextAccNum
+
+        while ( uaccountno != tempNextAccNum && tempNext != NULL)
+			copy from next in the record whose address is in temp to temp
+			copy from next in the record whose address is in tempNext to tempNext
+			if ( tempNext != NULL )
+				copy from next in the record whose address is in tempNextNext to tempNextNext
+				copy from accountno in the record whose address is in tempNext to tempNextAccNum
+			else 
+				copy from NULL to tempNextNext
+
+		if ( tempNext != NULL )
+			while ( tempNextAccNum == accountno && tempNext != NULL)
+				copy from next in the record whose address is in tempNext to tempNext
+
+			copy from tempNext to next in the record whose address is in temp
+			copy from 0 to returnVal
+
+
+
+            
+
+	
+
+return returnVal
+	
+
+    
