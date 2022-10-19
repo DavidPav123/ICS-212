@@ -54,13 +54,5 @@ else
 			copy from tempNext to next in the record whose address is in temp
 			copy from 0 to returnVal
 
-
-
-            
-
-	
-
 return returnVal
-	
-
-    
+ 
