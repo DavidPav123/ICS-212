@@ -344,11 +344,12 @@ int writefile(struct record * database, char filename[])
 
 int readfile(struct record ** database, char filename[])
 {
-    struct record *start, *current;
+    struct record *current, *previous;
     FILE *fptr;
     int accountNumber;
     char name[30], address[60];
-    start = *database;
+    current = *database;
+    previous = NULL;
 
     fptr = fopen(filename, "r");
 
@@ -365,6 +366,13 @@ int readfile(struct record ** database, char filename[])
         current->accountno = accountNumber;
         strcpy(current->name, name);
         strcpy(current->address, address);
+
+        if (previous != NULL)
+        {
+            previous->next = current;
+        }
+        
+        previous = current;
     }
     fclose(fptr);
 
