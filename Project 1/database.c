@@ -69,7 +69,7 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
     strcpy(uacc->name, name);
     strcpy(uacc->address, address);
 
-    if (database == NULL)
+    /*if (database == NULL)
     {
         uacc->next = NULL;
         start = uacc;
@@ -113,7 +113,7 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
                 uacc->next = NULL;
             }
         }
-    }
+    }*/
 
 }
 

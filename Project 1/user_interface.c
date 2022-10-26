@@ -49,7 +49,8 @@ int main(int argc, char* argv[])
 {
     struct record * start = NULL;
     int accountNum, whileLoop = 1, accountLoop, checkReturn;
-    char name, address, input;
+    char name[30], address[60], input;
+    struct record first;
 
     if(argc == 2)
     {
@@ -69,6 +70,9 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    start = &first;
+    readfile(&start, "record.txt");
+
     printf("The following program will allow for adding, removing, finding, and printing of record from a bank database.\n\n");
     
     while(whileLoop == 1)
@@ -86,6 +90,8 @@ int main(int argc, char* argv[])
 
         if(strncmp(&input,"add",strlen(&input) - 1) == 0 && strlen(&input) > 0)
         {
+            getaddress(address, 60);
+
             printf("Enter account number:\n");
             while(accountLoop == 1)
             {
@@ -111,11 +117,9 @@ int main(int argc, char* argv[])
             }
         
             printf("Enter name:\n");
-            fgets(&name, 30, stdin);
+            fgets(name, 30, stdin);
 
-            getaddress(&address, 60);
-
-            addRecord(&start, accountNum, &name, &address);
+            addRecord(&start, accountNum, name, address);
         }
         else if(strncmp(&input,"printall",strlen(&input) - 1) == 0 && strlen(&input) > 0)
         {
@@ -179,6 +183,8 @@ int main(int argc, char* argv[])
         }
         else if(strncmp(&input,"exit",strlen(&input) - 1) == 0 && strlen(&input) > 0)
         {
+            writefile(start, "records.txt");
+            cleanup(&start);
             whileLoop = 0;
         }
         else 
@@ -220,7 +226,8 @@ void getaddress(char addressArr [], int maxLen)
     {
         addressArr[currentLen] = fgetc(stdin);
 
-        if(currentLen > 0 && addressArr[currentLen - 1] == 'f' && addressArr[currentLen - 2] == '/'){
+        if(currentLen > 0 && addressArr[currentLen - 1] == 'f' && addressArr[currentLen - 2] == '/')
+        {
             addressArr[currentLen - 1] = ' ';
             addressArr[currentLen - 2] = ' ';
             whileLoop = 0;
