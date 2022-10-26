@@ -46,7 +46,7 @@ void getaddressfromfile(char [], int, FILE*);
 
 void addRecord(struct record **database, int accountNumber, char name[ ], char address[ ])
 {
-    struct record * temp, *tempNext, *tempNextNext, *uacc, *start;
+    struct record * temp, *tempNext, *tempNextNext, uacc, *start;
 
     int tempNextAccNum;
 
@@ -65,9 +65,9 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
         printf("%s\n\n", address);
     }
 
-    uacc->accountno = accountNumber;
-    strcpy(uacc->name, name);
-    strcpy(uacc->address, address);
+    uacc.accountno = accountNumber;
+    strcpy(uacc.name, name);
+    strcpy(uacc.address, address);
 
     /*if (database == NULL)
     {
