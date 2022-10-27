@@ -181,7 +181,7 @@ int main(int argc, char* argv[])
         else if(strncmp(usrInput,"exit",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             writefile(start, "records.txt");
-            //cleanup(&start);
+            cleanup(&start);
             whileLoop = 0;
         }
         else 

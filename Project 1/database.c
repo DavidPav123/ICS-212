@@ -17,7 +17,7 @@
 //   called by the user interface
 //
 //  REFERENCES:
-//   Textbook section 4.5
+//   Textbook sections 4.5, 8.7
 //
 ****************************************************************/
 
@@ -110,7 +110,7 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
             else 
             {
                 tempNext->next = uacc;
-                uacc->next = NULL;
+                uacc->next = tempNextNext;
             }
         }
     }
@@ -142,7 +142,7 @@ void printAllRecords(struct record *database)
 
     while (temp != NULL) 
     {
-        printf("%d\n%s%s\n%s\n", temp->accountno, temp->name, temp->address, temp->next);
+        printf("%d\n%s%s\n\n", temp->accountno, temp->name, temp->address);
         temp = temp->next;
     }
 }
@@ -184,7 +184,12 @@ int findRecord(struct record * database, int accountNumber)
 
     if (temp->accountno == accountNumber)
     {
-        
+        returnVal = 0;
+        while (temp != NULL && temp->accountno == accountNumber)
+        {
+            printf("\n%d\n%s%s\n", temp->accountno, temp->name, temp->address);
+            temp = temp->next;
+        }
     }
     else 
     {
@@ -220,10 +225,11 @@ int deleteRecord(struct record ** database, int accountNumber)
         "with accountNumber value: ");
         printf("%d\n\n", accountNumber);
     }
-
+    
     returnVal = -1;
     if (database != NULL)
-    {
+    {        
+
         temp = *database;
         tempNext = temp->next;
         tempNextAccNum = temp->accountno;
@@ -237,10 +243,13 @@ int deleteRecord(struct record ** database, int accountNumber)
             }
             else 
             {
-                while (tempNextAccNum == accountNumber && temp != NULL)
+                while (temp != NULL && tempNextAccNum == accountNumber)
                 {
                     temp = temp->next;
-                    tempNextAccNum = temp->accountno;
+                    if (temp != NULL)
+                    {
+                        tempNextAccNum = temp->accountno;
+                    }
                 }
                 *database = temp;
                 returnVal = 0;
@@ -249,25 +258,24 @@ int deleteRecord(struct record ** database, int accountNumber)
         else 
         {
             tempNextAccNum = tempNext->accountno;
-            while (accountNumber != tempNextAccNum && tempNext != NULL)
+            while (tempNext != NULL && accountNumber != tempNextAccNum)
             {
                 temp = temp->next;
                 tempNext = tempNext->next;
                 if (tempNext != NULL)
                 {
-                    tempNextNext = tempNextNext->next;
                     tempNextAccNum = tempNext->accountno;
-                }
-                else 
-                {
-                    tempNextNext = NULL;
                 }
             }
             if ( tempNext != NULL )
             {
-                while (tempNextAccNum == accountNumber && tempNext != NULL)
+                while (tempNext != NULL && tempNextAccNum == accountNumber)
                 {
                     tempNext = tempNext->next;
+                    if (tempNext != NULL)
+                    {
+                        tempNextAccNum = tempNext->accountno;
+                    }
                 }
                 temp->next = tempNext;
                 returnVal = 0;
@@ -378,12 +386,24 @@ int readfile(struct record ** database, char filename[])
 
 void cleanup(struct record ** database)
 {
-    database = NULL;
+    struct record *temp, *tempNext;
+    temp = *database;
+    tempNext = temp->next;
+    while (temp != NULL)
+    {
+        free(temp);
+        temp = tempNext;
+        if (temp != NULL)
+        {
+            tempNext = temp->next;
+        }
+    }
+    *database = NULL;
 }
 
 /*****************************************************************
 //
-//  Function name: cleanup
+//  Function name: getaddressfromfile
 //
 //  DESCRIPTION:   Don't forget to describe what your main
 //                 function does.
