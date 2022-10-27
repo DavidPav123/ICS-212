@@ -28,7 +28,6 @@ void getaddress (char [], int);
 
 int debugmode = 0;
 
-
 /*****************************************************************
 //
 //  Function name: main
@@ -47,10 +46,10 @@ int debugmode = 0;
 
 int main(int argc, char* argv[])
 {
-    struct record * start = NULL;
-    int accountNum, whileLoop = 1, accountLoop, checkReturn;
-    char name[30], address[60], input;
-    struct record first;
+    int accountNum, whileLoop, accountLoop, checkReturn;
+    char name[30], address[60], usrInput[10];
+    struct record *start = NULL;
+    whileLoop = 1;
 
     if(argc == 2)
     {
@@ -70,14 +69,13 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    start = &first;
-    readfile(&start, "record.txt");
+    readfile(&start, "records.txt");
 
     printf("The following program will allow for adding, removing, finding, and printing of record from a bank database.\n\n");
     
     while(whileLoop == 1)
     {
-        printf("Please enter one of the following menu options:\n");
+        printf("\nPlease enter one of the following menu options:\n");
         printf("add: adds a record to the databse\n");
         printf("printall: prints all records in the database\n");
         printf("find: finds a record in the database\n");
@@ -86,12 +84,10 @@ int main(int argc, char* argv[])
         printf("Option Selection:\n");
 
         accountLoop = 1;
-        fgets(&input, 10, stdin);
+        fgets(usrInput, 10, stdin);
 
-        if(strncmp(&input,"add",strlen(&input) - 1) == 0 && strlen(&input) > 0)
+        if(strncmp(usrInput,"add",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
-            getaddress(address, 60);
-
             printf("Enter account number:\n");
             while(accountLoop == 1)
             {
@@ -119,13 +115,15 @@ int main(int argc, char* argv[])
             printf("Enter name:\n");
             fgets(name, 30, stdin);
 
+            getaddress(address, 60);
+
             addRecord(&start, accountNum, name, address);
         }
-        else if(strncmp(&input,"printall",strlen(&input) - 1) == 0 && strlen(&input) > 0)
+        else if(strncmp(usrInput,"printall",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printAllRecords(start);
         }
-        else if(strncmp(&input,"find",strlen(&input) - 1) == 0 && strlen(&input) > 0)
+        else if(strncmp(usrInput,"find",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printf("Enter account number:\n");
             while(accountLoop == 1)
@@ -153,7 +151,7 @@ int main(int argc, char* argv[])
 
             findRecord(start, accountNum);
         }
-        else if(strncmp(&input,"delete ",strlen(&input) - 1) == 0 && strlen(&input) > 0)
+        else if(strncmp(usrInput,"delete ",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printf("Enter account number:\n");
             while(accountLoop == 1)
@@ -178,13 +176,12 @@ int main(int argc, char* argv[])
                     }
                 }
             }
-
             deleteRecord(&start, accountNum);
         }
-        else if(strncmp(&input,"exit",strlen(&input) - 1) == 0 && strlen(&input) > 0)
+        else if(strncmp(usrInput,"exit",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             writefile(start, "records.txt");
-            cleanup(&start);
+            //cleanup(&start);
             whileLoop = 0;
         }
         else 
@@ -211,6 +208,7 @@ int main(int argc, char* argv[])
 
 void getaddress(char addressArr [], int maxLen) 
 {
+    char tempArr[100];
     int currentLen = 0, whileLoop = 1;
 
     if(debugmode == 1)
@@ -224,15 +222,16 @@ void getaddress(char addressArr [], int maxLen)
 
     while(currentLen < maxLen && whileLoop == 1)
     {
-        addressArr[currentLen] = fgetc(stdin);
+        tempArr[currentLen] = fgetc(stdin);
 
-        if(currentLen > 0 && addressArr[currentLen - 1] == 'f' && addressArr[currentLen - 2] == '/')
+        if(currentLen > 0 && tempArr[currentLen - 1] == 'f' && tempArr[currentLen - 2] == '/')
         {
-            addressArr[currentLen - 1] = ' ';
-            addressArr[currentLen - 2] = ' ';
+            tempArr[currentLen - 1] = ' ';
+            tempArr[currentLen - 2] = '\0';
             whileLoop = 0;
         }
 
         currentLen++;
     }
+    strcpy(addressArr, tempArr);
 }
