@@ -148,8 +148,11 @@ int main(int argc, char* argv[])
                     }
                 }
             }
-
-            findRecord(start, accountNum);
+            
+            if(findRecord(start, accountNum) == -1)
+            {
+                printf("\nRecord not found\n");
+            }
         }
         else if(strncmp(usrInput,"delete ",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
@@ -176,7 +179,14 @@ int main(int argc, char* argv[])
                     }
                 }
             }
-            deleteRecord(&start, accountNum);
+            if (deleteRecord(&start, accountNum) == -1)
+            {
+                printf("\nRecord not found\n");
+            }
+            else 
+            {
+                printf("\nRecord succesfully deleted\n");
+            }
         }
         else if(strncmp(usrInput,"exit",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {

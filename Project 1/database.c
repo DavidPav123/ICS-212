@@ -60,7 +60,7 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
         printf("accountNumber: ");
         printf("%d\n", accountNumber);
         printf("name: ");
-        printf("%s\n", name);
+        printf("%s", name);
         printf("address: ");
         printf("%s\n\n", address);
     }
@@ -125,7 +125,7 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
 //
 //  Parameters:    database (struct record *) : a pointer to a database
 //
-//  Return values:  void
+//  Return values:  none
 //
 ****************************************************************/
 
@@ -142,7 +142,7 @@ void printAllRecords(struct record *database)
 
     while (temp != NULL) 
     {
-        printf("%d\n%s%s\n\n", temp->accountno, temp->name, temp->address);
+        printf("\n%d\n%s%s\n", temp->accountno, temp->name, temp->address);
         temp = temp->next;
     }
 }
@@ -151,7 +151,7 @@ void printAllRecords(struct record *database)
 //
 //  Function name: findRecord
 //
-//  DESCRIPTION:   Finds record that matchs specified account number
+//  DESCRIPTION:   Finds records that matches specified account number
 //
 //  Parameters:    database (struct record *) : a pointer to a database
 //                 accountNumber (int) : the account number of the 
@@ -165,7 +165,7 @@ void printAllRecords(struct record *database)
 int findRecord(struct record * database, int accountNumber)
 {
     struct record * temp;
-    int returnVal;
+    int returnVal, tempNextAccNum;
 
     temp = database;
 
@@ -176,25 +176,36 @@ int findRecord(struct record * database, int accountNumber)
         "with accountNumber value: ");
         printf("%d\n\n", accountNumber);
     }
-
-    while (temp != NULL && temp->accountno != accountNumber)
+    if (database != NULL)
     {
-        temp = temp->next;
-    }
-
-    if (temp->accountno == accountNumber)
-    {
-        returnVal = 0;
-        while (temp != NULL && temp->accountno == accountNumber)
+        tempNextAccNum = temp->accountno;
+        while (temp != NULL && tempNextAccNum != accountNumber)
         {
-            printf("\n%d\n%s%s\n", temp->accountno, temp->name, temp->address);
             temp = temp->next;
+            if (temp != NULL)
+            {
+                tempNextAccNum = temp->accountno;
+            }
+        }
+        if (tempNextAccNum == accountNumber)
+        {
+            returnVal = 0;
+            while (temp != NULL && tempNextAccNum == accountNumber)
+            {
+                printf("\n%d\n%s%s\n", temp->accountno, temp->name, temp->address);
+                temp = temp->next;
+                if (temp != NULL)
+                {
+                    tempNextAccNum = temp->accountno;
+                }
+            }
+        }
+        else 
+        {
+            returnVal = -1;
         }
     }
-    else 
-    {
-        returnVal = -1;
-    }
+    
 
     return returnVal;
 }
@@ -215,7 +226,7 @@ int findRecord(struct record * database, int accountNumber)
 
 int deleteRecord(struct record ** database, int accountNumber)
 {
-    struct record * temp, *tempNext, *tempNextNext;
+    struct record * temp, *tempNext;
     int tempNextAccNum, returnVal;
 
     if (debugmode == 1)
@@ -227,7 +238,7 @@ int deleteRecord(struct record ** database, int accountNumber)
     }
     
     returnVal = -1;
-    if (database != NULL)
+    if (*database != NULL)
     {        
 
         temp = *database;
@@ -290,10 +301,9 @@ int deleteRecord(struct record ** database, int accountNumber)
 //
 //  Function name: writefile
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Writes the records in the database to a file
 //
-//  Parameters:    database (struct record **) : a pointer to a database
+//  Parameters:    database (struct record **): a pointer to a database record pointer
 //                 filename (char []) : name of the file to be writen to
 //
 //  Return values:  0 : file was opened and read succesfully
@@ -333,10 +343,9 @@ int writefile(struct record * database, char filename[])
 //
 //  Function name: readfile
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Reads records from a file and adds them to the database
 //
-//  Parameters:    database (struct record **) : a pointer to a database
+//  Parameters:    database (struct record **): a pointer to a database record pointer
 //                 filename (char []) : name of the file to be read
 //
 //  Return values:  0 : file was opened and read succesfully
@@ -346,12 +355,9 @@ int writefile(struct record * database, char filename[])
 
 int readfile(struct record ** database, char filename[])
 {
-    struct record *current, *previous;
     FILE *fptr;
     int accountNumber;
     char name[30], address[60];
-    current = *database;
-    previous = NULL;
 
     fptr = fopen(filename, "r");
 
@@ -375,10 +381,9 @@ int readfile(struct record ** database, char filename[])
 //
 //  Function name: cleanup
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Deallocates all of the memeory allocated during run time
 //
-//  Parameters:    database (struct record **) : a pointer to a database
+//  Parameters:    database (struct record **): a pointer to a database record pointer
 //
 //  Return values:  none
 //
@@ -405,10 +410,9 @@ void cleanup(struct record ** database)
 //
 //  Function name: getaddressfromfile
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Reads an address from the file specified
 //
-//  Parameters:    database (struct record **) : a pointer to a database
+//  Parameters:    database (struct record **): a pointer to a database record pointer
 //
 //  Return values:  none
 //
@@ -434,5 +438,4 @@ void getaddressfromfile(char addressArr[], int maxLen, FILE* fptr)
         currentLen++;
     }
     strcpy(addressArr, tempArr);
-
 }
