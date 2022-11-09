@@ -1,25 +1,23 @@
 #include <stdio.h>
 
-int main()
-{
-    FILE *fptr;
-    unsigned char buffer[20];
-    int i;
-    unsigned char header[2];
+int main() {
+  FILE *fptr;
+  unsigned char dataArr[20];
+  unsigned int i;
+  unsigned int n = dataArr[13], sourcePort = 51703;
+  char binStr[100];
 
+  fptr = fopen("request2.bin", "rb+");
 
-    fptr = fopen("request1.bin", "rb+");
+  fread(dataArr, sizeof(dataArr), 1, fptr);
 
-    fread(buffer, sizeof(buffer), 1, fptr);
+  fclose(fptr);
 
-    fclose(fptr);
+  if (((sourcePort & (1 << 6)) >> 6) ^ ((sourcePort & (1 << 10)) >> 10)) {
+    sourcePort ^= 1 << 6;
+    sourcePort ^= 1 << 10;
+  }
+  printf("%x", sourcePort);
 
-    header[0] = buffer[1];
-    header[1] = buffer[0];
-
-    //multiply each individual component by its place value ie for ff12 make it ff00 + 12
-    printf("%d",header[0] header[1]);
-
-    return 0;
-
+  return 0;
 }

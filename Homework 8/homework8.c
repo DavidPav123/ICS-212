@@ -42,10 +42,22 @@ void makeheader(const unsigned char[], unsigned char[]);
 //
 ****************************************************************/
 
-int main(int argc, char *argv[]) 
-{
+int main(int argc, char *argv[]) {
     int returnVal;
-    return returnVal;
+    unsigned char tcpPacket[20], tcpResponse[20];
+
+    readfile("request1.bin", tcpPacket);
+    for (int i=0; i < 20;i++)
+    {
+        printf("%x ",tcpPacket[i]);
+    }
+    printheader(tcpPacket);
+    /*makeheader(tcpPacket, tcpResponse);
+    writefile("response1.bin", tcpResponse);
+    readfile("response1.bin", tcpPacket);
+    printheader(tcpPacket);*/
+
+    return 0;
 }
 
 /*****************************************************************
@@ -62,24 +74,21 @@ int main(int argc, char *argv[])
 //                 -1 : some meaning
 //
 ****************************************************************/
-int readfile(const char filename[], unsigned char dataArr[]) 
-{
-    int returnVal;
-    FILE *fptr;
+int readfile(const char filename[], unsigned char dataArr[]) {
+  int returnVal;
+  FILE *fptr;
 
-    fptr = fopen(filename, "rb");
+  fptr = fopen(filename, "rb");
 
-    if (fptr == NULL)
-    {
-        returnVal = -1;
-    }
-    else {
-        fread(dataArr, sizeof(&dataArr), 1, fptr);
+  if (fptr == NULL) {
+    returnVal = -1;
+  } else {
+    fread(dataArr, sizeof(&dataArr), 1, fptr);
 
-        fclose(fptr);
-    }
+    fclose(fptr);
+  }
 
-    return returnVal;
+  return returnVal;
 }
 
 /*****************************************************************
@@ -96,24 +105,21 @@ int readfile(const char filename[], unsigned char dataArr[])
 //                 -1 : some meaning
 //
 ****************************************************************/
-int writefile(const char filename[], const unsigned char dataArr[]) 
-{
-    int returnVal;
-    FILE *fptr;
+int writefile(const char filename[], const unsigned char dataArr[]) {
+  int returnVal;
+  FILE *fptr;
 
-    fptr = fopen(filename, "wb+");
+  fptr = fopen(filename, "wb+");
 
-    if (fptr == NULL)
-    {
-        returnVal = -1;
-    }
-    else {
-        fwrite(dataArr, sizeof(&dataArr), 1, fptr);
+  if (fptr == NULL) {
+    returnVal = -1;
+  } else {
+    fwrite(dataArr, sizeof(&dataArr), 1, fptr);
 
-        fclose(fptr);
-    }
+    fclose(fptr);
+  }
 
-    return returnVal;
+  return returnVal;
 }
 
 /*****************************************************************
@@ -130,14 +136,49 @@ int writefile(const char filename[], const unsigned char dataArr[])
 //                 -1 : some meaning
 //
 ****************************************************************/
-void printheader(const unsigned char dataArr[]) 
-{
-    char header[2];
-    header[0] = dataArr[1];
-    header[1] = dataArr[0];
-
-
-    printf("%d",header);
+void printheader(const unsigned char dataArr[]) {
+  unsigned int i, n, seq, ack;
+  seq = (dataArr[7] * 16777216) + (dataArr[6] * 65536) + (dataArr[5] * 256) + dataArr[4];
+  ack = (dataArr[11] * 16777216) + (dataArr[10] * 65536) + (dataArr[9] * 256) + dataArr[8];
+  printf("%x%x%x%x\n",dataArr[7],dataArr[6],dataArr[5],dataArr[4]);
+  printf("%u\n", (dataArr[1] * 256) + dataArr[0]);
+  printf("%u\n", (dataArr[3] * 256) + dataArr[2]);
+  printf("%u\n", seq);
+  printf("%u\n", ack);
+  n = dataArr[13];
+  printf("Control bits which are set to 1:\n");
+  for (i = 1 << 5; i > 0; i = i / 2) {
+    if (i == 32) {
+      if (n & i) {
+        printf("URG\n");
+      }
+    }
+    if (i == 16) {
+      if (n & i) {
+        printf("ACK\n");
+      }
+    }
+    if (i == 8) {
+      if (n & i) {
+        printf("PSH\n");
+      }
+    }
+    if (i == 4) {
+      if (n & i) {
+        printf("RST\n");
+      }
+    }
+    if (i == 2) {
+      if (n & i) {
+        printf("SYN\n");
+      }
+    }
+    if (i == 1) {
+      if (n & i) {
+        printf("FIN\n");
+      }
+    }
+  }
 }
 
 /*****************************************************************
@@ -156,5 +197,41 @@ void printheader(const unsigned char dataArr[])
 ****************************************************************/
 void makeheader(const unsigned char dataArr[], unsigned char newArr[]) 
 {
-
+    unsigned int n = dataArr[13], sourcePort = (dataArr[1] * 256) + dataArr[0];
+    int i;
+    //Flip the bits in the header
+    //Dest header to source header
+    if (((sourcePort & (1 << 6)) >> 6) ^ ((sourcePort & (1 << 10)) >> 10))
+    {
+      sourcePort ^= 1 << 6;
+      sourcePort ^= 1 << 10;
+    }
+    newArr[0] = dataArr[2];
+    newArr[1] = dataArr[3];
+    //Source header to dest header
+    newArr[2] = dataArr[0];
+    newArr[3] = dataArr[1];
+    newArr[4] = dataArr[8];
+    newArr[5] = dataArr[9];
+    newArr[6] = dataArr[10];
+    newArr[7] = dataArr[11];
+    newArr[8] = dataArr[8] + 1;
+    newArr[9] = dataArr[9];
+    newArr[10] = dataArr[10];
+    newArr[11] = dataArr[11];
+    newArr[12] = dataArr[12];
+    if (n & (1<<1)){
+        if (n & (1<<4))
+        {
+            newArr[13] = dataArr[13];
+        }
+        else 
+        {
+            newArr[13] = dataArr[13] +2;
+        }
+    }
+    for (i = 14; i <20; i++)
+    {
+        newArr[i] = dataArr[i];
+    }
 }
