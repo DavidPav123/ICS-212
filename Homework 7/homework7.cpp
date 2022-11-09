@@ -2,15 +2,15 @@
 //
 //  NAME:        David Palicek
 //
-//  HOMEWORK:    2
+//  HOMEWORK:    7
 //
 //  CLASS:       ICS 212
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 9th, 2022
+//  DATE:        November 5th, 2022
 //
-//  FILE:        homework2.c
+//  FILE:        homework7.cpp
 //
 //  DESCRIPTION:
 //   This program asks for a user to enter a poitive integer
@@ -19,6 +19,9 @@
 //
 //  REFERENCES:
 //      The C Programming Language sections: 1.5, 2.11, 3.5, 7.2, 7.4
+//      The C++ Programming Language sections: 2.2.5, 7.7.2, 38.4.1.2
+//      http://www.cplusplus.com/doc/tutorial/basic_io/#cin
+//      http://www.cplusplus.com/reference/ios/ios/#functions
 //
 ****************************************************************/
 
@@ -49,10 +52,7 @@ void print_table(int);
 
 int main(int argc, char* argv[])
 {
-    //print_table(user_interface());
-    int a = 1;
-    int b = 2;
-    int& c = a;
+    print_table(user_interface());
 }
 
 /*****************************************************************
@@ -69,28 +69,31 @@ int main(int argc, char* argv[])
 //
 ****************************************************************/
 
-/*int user_interface()
+int user_interface()
 {
     int input;
 
-    printf("This program will ask for a maximum poitive integer\n"
+    cout << "This program will ask for a maximum poitive integer\n"
     "It will then print out all of the numbers from 0 up to and including the input number\n"
-    "It will also print if each number is a multiple of 4.\n\nEnter maximum number to show: ");
+    "It will also print if each number is a multiple of 4."
+    "\n\nEnter maximum number to show: " << endl;
 
     while (1 == 1)
     {
-        if (scanf(" %d", &input) != 1)
+        cin >> input;
+        if (!cin.good())
         {
-            while (getchar() != '\n');
-            printf("Input was not a number. Please enter a positive Integer.\n\n"
-            "Enter maximum number to show: ");
+            cin.clear();
+            cin.ignore();
+            cout << "Input was not a number. Please enter a positive Integer.\n\n"
+            "Enter maximum number to show: ";
         }
         else
         {
             if (input < 0)
             {
-                printf("Input was not positive. Please enter a positive Integer."
-                "\n\nEnter maximum number to show: ");
+                cout << "Input was not positive. Please enter a positive Integer."
+                "\n\nEnter maximum number to show: ";
             }
             else
             {
@@ -98,35 +101,34 @@ int main(int argc, char* argv[])
             }
         }
     }
-}*/
+}
 
 /*****************************************************************
 //
-//  Function name: is_multiple
+//  Function name: is_multiple4
 //
 //  DESCRIPTION:   Checks if the given number is a multiple of 4
 //                
 //
 //  Parameters:    input (int) : contains the number which will 
-//                               checked 
+//                               checked
+//                 Modifier (int&) : a reference to an integer 
+//                     that tells if the input is a multiple of 4   
 //                               
 //
-//  Return values:  0 : number is not a multiple of 4
-//                  1 : number is a multiple of 4
+//  Return values:  none
 //
 ****************************************************************/
 
 void is_multiple4(int input, int& Modifier)
 {
-    int isMultiple;
-
     if ((input % 4) == 0)
     {
-        isMultiple = 1;
+        Modifier = 1;
     }
     else
     {
-        isMultiple = 0;
+        Modifier = 0;
     }
 }
 
@@ -146,14 +148,15 @@ void is_multiple4(int input, int& Modifier)
 //
 ****************************************************************/
 
-/*void print_table(int maxNum)
+void print_table(int maxNum)
 {
-    int i;
-
-    printf("%10s %s\n", "Number", "Multiple of 4?");
+    int i, multipleYN;
+    int& value = multipleYN;
+    cout << std::setw(10) << "Number " << "Multiple of 4?" << endl;
 
     for (i = 0; i <= maxNum; i++)
     {
-        printf("%10d %s\n", i, is_multiple(i) == 1 ? "Yes":"No");
+        is_multiple4(i, value);
+        cout << std::setw(9) << i << (multipleYN == 1 ? " Yes":" No") << endl;
     }
-}*/
+}
