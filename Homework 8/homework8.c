@@ -1,6 +1,6 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
 //  HOMEWORK:    1
 //
@@ -8,7 +8,7 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        November 12th, 2022
 //
 //  FILE:        homework8.c
 //
@@ -46,7 +46,7 @@ void makeheader(const unsigned char[], unsigned char[]);
 
 int main(int argc, char *argv[]) {
   int returnVal;
-  unsigned char tcpPacket[20], tcpResponse[20];
+  unsigned char tcpPacket[20], tcpResponse[25];
 
   readfile("request1.bin", tcpPacket);
   for (int i = 0; i < 20; i++) {
@@ -60,9 +60,6 @@ int main(int argc, char *argv[]) {
   printf("\n");
   writefile("response1.bin", tcpResponse);
   readfile("response1.bin", tcpPacket);
-  for (int i = 0; i < 20; i++) {
-    printf("%x ", tcpPacket[i]);
-  }
   printheader(tcpPacket);
 
   return 0;
@@ -91,12 +88,11 @@ int readfile(const char filename[], unsigned char dataArr[]) {
   if (fptr == NULL) {
     returnVal = -1;
   } else {
-    fread(dataArr, sizeof(&dataArr) + 2, 2, fptr);
+    fread(dataArr, sizeof(&dataArr), 20, fptr);
 
     fclose(fptr);
   }
   
-
   return returnVal;
 }
 
@@ -146,7 +142,7 @@ int writefile(const char filename[], const unsigned char dataArr[]) {
 //
 ****************************************************************/
 void printheader(const unsigned char dataArr[]) {
-  unsigned int i, n, seq, ack;
+  unsigned int i, n;
   printf("\n%u\n", (dataArr[1] * 256) + dataArr[0]);
   printf("%u\n", (dataArr[3] * 256) + dataArr[2]);
   printf("%u\n", (dataArr[7] * 16777216) + (dataArr[6] * 65536) +
@@ -221,9 +217,9 @@ void makeheader(const unsigned char dataArr[], unsigned char newArr[]) {
   newArr[3] = dataArr[1];
   // Sequence Number = sequence number + 1
   newArr[4] = newSeq % 256;
-  newArr[5] = (newSeq - ((dataArr[7]*16777216) + (dataArr[6]*65536) + newArr[4]))  % 65536;
-  newArr[6] = (newSeq - ((dataArr[7]*16777216) + newArr[5] + newArr[4]))  % 16777216;
-  newArr[7] = (newSeq - ((dataArr[6]*65536) + (dataArr[5]*256) + dataArr[4])) % 4294967296;
+  newArr[5] = ((newSeq - ((dataArr[7]*16777216) + (dataArr[6]*65536) + newArr[4]))/256)  % 256;
+  newArr[6] = ((newSeq - ((dataArr[7]*16777216) + newArr[5] + newArr[4]))/65536)  % 256;
+  newArr[7] = ((newSeq - ((dataArr[6]*65536) + (dataArr[5]*256) + dataArr[4]))/16777216) % 256;
   // Ack Number  = sequence Number
   newArr[8] = dataArr[4];
   newArr[9] = dataArr[5];
