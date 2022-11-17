@@ -13,7 +13,7 @@
 //  FILE:        user_interface.c
 //
 //  DESCRIPTION:
-//   Holds the code for allowing a user to interact with the database 
+//   Holds the code for allowing a user to interact with the database
 //
 //  REFERENCES:
 //   Textbook sections 7.4, 7.7, B1.4, B3
@@ -24,7 +24,7 @@
 #include <string.h>
 #include "database.h"
 
-void getaddress (char [], int);
+void getaddress(char[], int);
 
 int debugmode = 0;
 
@@ -48,12 +48,12 @@ int main(int argc, char* argv[])
 {
     int accountNum, whileLoop, accountLoop, checkReturn;
     char name[30], address[60], usrInput[10];
-    struct record *start = NULL;
+    struct record* start = NULL;
     whileLoop = 1;
 
-    if(argc == 2)
+    if (argc == 2)
     {
-        if(strcmp(argv[1], "debug") != 0)
+        if (strcmp(argv[1], "debug") != 0)
         {
             printf("Invalid input\n");
             return -1;
@@ -72,8 +72,8 @@ int main(int argc, char* argv[])
     readfile(&start, "records.txt");
 
     printf("The following program will allow for adding, removing, finding, and printing of record from a bank database.\n\n");
-    
-    while(whileLoop == 1)
+
+    while (whileLoop == 1)
     {
         printf("\nPlease enter one of the following menu options:\n");
         printf("add: adds a record to the databse\n");
@@ -86,10 +86,10 @@ int main(int argc, char* argv[])
         accountLoop = 1;
         fgets(usrInput, 10, stdin);
 
-        if(strncmp(usrInput,"add",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        if (strncmp(usrInput, "add", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printf("Enter account number:\n");
-            while(accountLoop == 1)
+            while (accountLoop == 1)
             {
                 checkReturn = scanf("%d", &accountNum);
 
@@ -104,14 +104,14 @@ int main(int argc, char* argv[])
                     {
                         printf("Input was not positive. Please enter a positive Integer.\n\n");
                     }
-                    else 
+                    else
                     {
                         while (getchar() != '\n');
-                        accountLoop = 0;    
+                        accountLoop = 0;
                     }
                 }
             }
-        
+
             printf("Enter name:\n");
             fgets(name, 30, stdin);
 
@@ -119,14 +119,14 @@ int main(int argc, char* argv[])
 
             addRecord(&start, accountNum, name, address);
         }
-        else if(strncmp(usrInput,"printall",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "printall", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printAllRecords(start);
         }
-        else if(strncmp(usrInput,"find",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "find", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printf("Enter account number:\n");
-            while(accountLoop == 1)
+            while (accountLoop == 1)
             {
                 checkReturn = scanf("%d", &accountNum);
 
@@ -141,23 +141,23 @@ int main(int argc, char* argv[])
                     {
                         printf("Input was not positive. Please enter a positive Integer.\n\n");
                     }
-                    else 
+                    else
                     {
                         while (getchar() != '\n');
-                        accountLoop = 0;    
+                        accountLoop = 0;
                     }
                 }
             }
-            
-            if(findRecord(start, accountNum) == -1)
+
+            if (findRecord(start, accountNum) == -1)
             {
                 printf("\nRecord not found\n");
             }
         }
-        else if(strncmp(usrInput,"delete ",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "delete ", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             printf("Enter account number:\n");
-            while(accountLoop == 1)
+            while (accountLoop == 1)
             {
                 checkReturn = scanf("%d", &accountNum);
 
@@ -172,10 +172,10 @@ int main(int argc, char* argv[])
                     {
                         printf("Input was not positive. Please enter a positive Integer.\n\n");
                     }
-                    else 
+                    else
                     {
                         while (getchar() != '\n');
-                        accountLoop = 0;    
+                        accountLoop = 0;
                     }
                 }
             }
@@ -183,18 +183,18 @@ int main(int argc, char* argv[])
             {
                 printf("\nRecord not found\n");
             }
-            else 
+            else
             {
                 printf("\nRecord succesfully deleted\n");
             }
         }
-        else if(strncmp(usrInput,"exit",strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "exit", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
         {
             writefile(start, "records.txt");
             cleanup(&start);
             whileLoop = 0;
         }
-        else 
+        else
         {
             printf("Unknow option, please enter a valid option\n\n");
         }
@@ -206,7 +206,7 @@ int main(int argc, char* argv[])
 //
 //  Function name: getaddress
 //
-//  DESCRIPTION:   Accepts users input of their address unil they 
+//  DESCRIPTION:   Accepts users input of their address unil they
 //                 enter the terminating character /f
 //
 //  Parameters:    adressArr (char *) : stores a pointer to the array the address is store in
@@ -216,12 +216,12 @@ int main(int argc, char* argv[])
 //
 ****************************************************************/
 
-void getaddress(char addressArr [], int maxLen) 
+void getaddress(char addressArr[], int maxLen)
 {
     char tempArr[100];
     int currentLen = 0, whileLoop = 1;
 
-    if(debugmode == 1)
+    if (debugmode == 1)
     {
         printf("Name of called function: getaddress\n");
         printf("Paramaters: char * addressArr and int maxLen, with maxLen value of ");
@@ -230,11 +230,11 @@ void getaddress(char addressArr [], int maxLen)
 
     printf("Enter your address, when done enter /f:\n");
 
-    while(currentLen < maxLen && whileLoop == 1)
+    while (currentLen < maxLen && whileLoop == 1)
     {
         tempArr[currentLen] = fgetc(stdin);
 
-        if(currentLen > 0 && tempArr[currentLen - 1] == 'f' && tempArr[currentLen - 2] == '/')
+        if (currentLen > 0 && tempArr[currentLen - 1] == 'f' && tempArr[currentLen - 2] == '/')
         {
             tempArr[currentLen - 1] = ' ';
             tempArr[currentLen - 2] = '\0';

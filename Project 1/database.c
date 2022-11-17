@@ -28,7 +28,7 @@
 
 extern int debugmode;
 
-void getaddressfromfile(char [], int, FILE*);
+void getaddressfromfile(char[], int, FILE*);
 
 /*****************************************************************
 //
@@ -45,18 +45,18 @@ void getaddressfromfile(char [], int, FILE*);
 //
 ****************************************************************/
 
-void addRecord(struct record **database, int accountNumber, char name[ ], char address[ ])
+void addRecord(struct record** database, int accountNumber, char name[], char address[])
 {
-    struct record * temp, *tempNext, *tempNextNext, *uacc;
+    struct record* temp, * tempNext, * tempNextNext, * uacc;
     int tempNextAccNum;
 
-    uacc = (struct record*)malloc( sizeof( struct record ) );
+    uacc = (struct record*)malloc(sizeof(struct record));
 
     if (debugmode == 1)
     {
         printf("Name of called function: addRecord\n");
         printf("Paramaters: struct record * database, int accountNumber, "
-        "char * name, and char * address, with values:\n");
+            "char * name, and char * address, with values:\n");
         printf("accountNumber: ");
         printf("%d\n", accountNumber);
         printf("name: ");
@@ -79,17 +79,17 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
         tempNext = temp->next;
         tempNextAccNum = temp->accountno;
 
-        if ( accountNumber > tempNextAccNum )
+        if (accountNumber > tempNextAccNum)
         {
             uacc->next = temp;
             *database = uacc;
         }
-        else if ( tempNext == NULL)
+        else if (tempNext == NULL)
         {
             temp->next = uacc;
             uacc->next = NULL;
         }
-        else 
+        else
         {
             tempNextNext = tempNext->next;
             tempNextAccNum = tempNext->accountno;
@@ -107,7 +107,7 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
                 temp->next = uacc;
                 uacc->next = tempNext;
             }
-            else 
+            else
             {
                 tempNext->next = uacc;
                 uacc->next = tempNextNext;
@@ -129,9 +129,9 @@ void addRecord(struct record **database, int accountNumber, char name[ ], char a
 //
 ****************************************************************/
 
-void printAllRecords(struct record *database)
+void printAllRecords(struct record* database)
 {
-    struct record *temp;
+    struct record* temp;
     temp = database;
 
     if (debugmode == 1)
@@ -140,7 +140,7 @@ void printAllRecords(struct record *database)
         printf("Paramaters: struct record * database\n\n");
     }
 
-    while (temp != NULL) 
+    while (temp != NULL)
     {
         printf("\n%d\n%s%s\n", temp->accountno, temp->name, temp->address);
         temp = temp->next;
@@ -154,7 +154,7 @@ void printAllRecords(struct record *database)
 //  DESCRIPTION:   Finds records that matches specified account number
 //
 //  Parameters:    database (struct record *) : a pointer to a database
-//                 accountNumber (int) : the account number of the 
+//                 accountNumber (int) : the account number of the
 //                                       record to be found
 //
 //  Return values:  0 : record was succesfully found
@@ -162,9 +162,9 @@ void printAllRecords(struct record *database)
 //
 ****************************************************************/
 
-int findRecord(struct record * database, int accountNumber)
+int findRecord(struct record* database, int accountNumber)
 {
-    struct record * temp;
+    struct record* temp;
     int returnVal, tempNextAccNum;
 
     temp = database;
@@ -173,7 +173,7 @@ int findRecord(struct record * database, int accountNumber)
     {
         printf("Name of called function: findRecord\n");
         printf("Paramaters: struct record * database and int accountNumber, "
-        "with accountNumber value: ");
+            "with accountNumber value: ");
         printf("%d\n\n", accountNumber);
     }
     if (database != NULL)
@@ -200,12 +200,12 @@ int findRecord(struct record * database, int accountNumber)
                 }
             }
         }
-        else 
+        else
         {
             returnVal = -1;
         }
     }
-    
+
 
     return returnVal;
 }
@@ -217,29 +217,29 @@ int findRecord(struct record * database, int accountNumber)
 //  DESCRIPTION:   deletes the records with the specified account number
 //
 //  Parameters:    database (struct record *) : a pointer to a database
-//                 accountNumber (int) : an account number 
+//                 accountNumber (int) : an account number
 //
 //  Return values:  0 : record was succesfully deleted
 //                  -1 : record was not succesfully deleted
 //
 ****************************************************************/
 
-int deleteRecord(struct record ** database, int accountNumber)
+int deleteRecord(struct record** database, int accountNumber)
 {
-    struct record * temp, *tempNext;
+    struct record* temp, * tempNext;
     int tempNextAccNum, returnVal;
 
     if (debugmode == 1)
     {
         printf("Name of called function: deleteRecord\n");
         printf("Paramaters: struct record * database and int accountNumber, "
-        "with accountNumber value: ");
+            "with accountNumber value: ");
         printf("%d\n\n", accountNumber);
     }
-    
+
     returnVal = -1;
     if (*database != NULL)
-    {        
+    {
 
         temp = *database;
         tempNext = temp->next;
@@ -252,7 +252,7 @@ int deleteRecord(struct record ** database, int accountNumber)
                 *database = NULL;
                 returnVal = 0;
             }
-            else 
+            else
             {
                 while (temp != NULL && tempNextAccNum == accountNumber)
                 {
@@ -266,7 +266,7 @@ int deleteRecord(struct record ** database, int accountNumber)
                 returnVal = 0;
             }
         }
-        else 
+        else
         {
             tempNextAccNum = tempNext->accountno;
             while (tempNext != NULL && accountNumber != tempNextAccNum)
@@ -278,7 +278,7 @@ int deleteRecord(struct record ** database, int accountNumber)
                     tempNextAccNum = tempNext->accountno;
                 }
             }
-            if ( tempNext != NULL )
+            if (tempNext != NULL)
             {
                 while (tempNext != NULL && tempNextAccNum == accountNumber)
                 {
@@ -311,10 +311,10 @@ int deleteRecord(struct record ** database, int accountNumber)
 //
 ****************************************************************/
 
-int writefile(struct record * database, char filename[])
+int writefile(struct record* database, char filename[])
 {
-    FILE *fptr;
-    struct record *writeTarget, *next;
+    FILE* fptr;
+    struct record* writeTarget, * next;
     writeTarget = database;
 
     fptr = fopen(filename, "w+");
@@ -353,9 +353,9 @@ int writefile(struct record * database, char filename[])
 //
 ****************************************************************/
 
-int readfile(struct record ** database, char filename[])
+int readfile(struct record** database, char filename[])
 {
-    FILE *fptr;
+    FILE* fptr;
     int accountNumber;
     char name[30], address[60];
 
@@ -389,9 +389,9 @@ int readfile(struct record ** database, char filename[])
 //
 ****************************************************************/
 
-void cleanup(struct record ** database)
+void cleanup(struct record** database)
 {
-    struct record *temp, *tempNext;
+    struct record* temp, * tempNext;
     temp = *database;
     tempNext = temp->next;
     while (temp != NULL)
@@ -424,11 +424,11 @@ void getaddressfromfile(char addressArr[], int maxLen, FILE* fptr)
     char tempArr[100];
     int currentLen = 0, whileLoop = 1;
 
-    while(currentLen < maxLen && whileLoop == 1)
+    while (currentLen < maxLen && whileLoop == 1)
     {
         tempArr[currentLen] = fgetc(fptr);
 
-        if(currentLen > 0 && tempArr[currentLen - 1] == 'f' && tempArr[currentLen - 2] == '/')
+        if (currentLen > 0 && tempArr[currentLen - 1] == 'f' && tempArr[currentLen - 2] == '/')
         {
             tempArr[currentLen - 1] = ' ';
             tempArr[currentLen - 2] = '\0';
