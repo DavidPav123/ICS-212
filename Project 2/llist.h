@@ -13,11 +13,10 @@
 //  FILE:        database.c
 //
 //  DESCRIPTION:
-//   Holds the function definitions for the database functions
-//   called by the user interface
+//   This file contains the function definitions for the llist class.
 //
 //  REFERENCES:
-//   Textbook sections ]
+//   Textbook sections 
 //
 ****************************************************************/
 
