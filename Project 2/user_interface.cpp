@@ -20,6 +20,7 @@
 //
 ****************************************************************/
 #include "llist.h"
+#include <cstring>
 #include <iostream>
 #include <fstream>
 
