@@ -240,6 +240,3 @@ void getaddress(char addressArr[], int maxLen)
     }
     strcpy(addressArr, tempArr);
 }
-
-
-
