@@ -32,6 +32,60 @@ extern int debugmode;
 
 /*****************************************************************
 //
+//  Function name: list
+//
+//  DESCRIPTION:   Default constructor for the llist class
+//
+//  Parameters:    none
+//
+//  Return values:  void
+//
+****************************************************************/
+
+llist::llist()
+{
+    start = NULL;
+}
+
+/*****************************************************************
+//
+//  Function name: list
+//
+//  DESCRIPTION:   Constructor for the llist class
+//
+//  Parameters:    file (char []) : stores the name of the file to be read from
+//
+//  Return values:  void
+//
+****************************************************************/
+
+llist::llist(char file[])
+{
+    start = NULL;
+    strcpy(filename, file);
+    readfile();
+}
+
+/*****************************************************************
+//
+//  Function name: ~list
+//
+//  DESCRIPTION:   Destructor for the llist class
+//
+//  Parameters:    none
+//
+//  Return values:  void
+//
+****************************************************************/
+
+llist::~llist()
+{
+    writefile();
+    cleanup();
+}
+
+/*****************************************************************
+//
 //  Function name: readfile
 //
 //  DESCRIPTION:  Reads the file and adds the records to the linked list
@@ -47,11 +101,11 @@ int llist::readfile()
 {
     int returnVal, accountNumber;
     char name[30], address[60];
-    ifstream File("filename.txt", std::ifstream::in);
+    ifstream File("records.txt", std::ifstream::in);
 
     if (File.is_open())
     {
-        while (File.good())
+        while (File.good() && File.peek() != EOF)
         {
             File >> accountNumber;
             File >> name;
@@ -84,7 +138,7 @@ int llist::readfile()
 
 int llist::writefile()
 {
-    ofstream File("filename.txt", std::ifstream::out);
+    ofstream File("records.txt", std::ifstream::out);
     struct record* writeTarget, * next;
     int returnVal;
     writeTarget = start;
@@ -174,59 +228,7 @@ void getaddressfromfile(char addressArr[], int maxLen, std::ifstream& File)
     strcpy(addressArr, tempArr);
 }
 
-/*****************************************************************
-//
-//  Function name: list
-//
-//  DESCRIPTION:   Default constructor for the llist class
-//
-//  Parameters:    none
-//
-//  Return values:  void
-//
-****************************************************************/
 
-llist::llist()
-{
-    start = NULL;
-}
-
-/*****************************************************************
-//
-//  Function name: list
-//
-//  DESCRIPTION:   Constructor for the llist class
-//
-//  Parameters:    file (char []) : stores the name of the file to be read from
-//
-//  Return values:  void
-//
-****************************************************************/
-
-llist::llist(char file[])
-{
-    start = NULL;
-    strcpy(filename, file);
-    readfile();
-}
-
-/*****************************************************************
-//
-//  Function name: ~list
-//
-//  DESCRIPTION:   Destructor for the llist class
-//
-//  Parameters:    none
-//
-//  Return values:  void
-//
-****************************************************************/
-
-llist::~llist()
-{
-    writefile();
-    cleanup();
-}
 
 /*****************************************************************
 //
@@ -400,7 +402,7 @@ void llist::printAllRecords()
 
     while (temp != NULL)
     {
-        cout << temp->accountno << temp->name << temp->address << endl;
+        cout << endl << temp->accountno << endl << temp->name << endl << temp->address << endl;
         temp = temp->next;
     }
 }

@@ -47,10 +47,9 @@ int debugmode = 0;
 
 int main(int argc, char* argv[])
 {
-    int accountNum, whileLoop, accountLoop, checkReturn;
+    int accountNum, whileLoop, accountLoop;
     string tempString;
     char name[30], address[60], usrInput[10];
-    struct record* start = NULL;
     whileLoop = 1;
 
     if (argc == 2)
@@ -71,7 +70,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    llist* database = new llist("database.txt");
+    llist* database = new llist("record.txt");
 
     cout << "The following program will allow for adding, removing, finding, and printing of record from a bank database." << endl;
 
@@ -82,7 +81,7 @@ int main(int argc, char* argv[])
         cout << "print: prints all records in the database" << endl;
         cout << "find: finds a record in the database" << endl;
         cout << "delete: deletes a record from the database" << endl;
-        cout << "quit: quits the program" << endl;
+        cout << "exit: exits the program" << endl << endl;
         cout << "Option Selection:" << endl;
 
         accountLoop = 1;
