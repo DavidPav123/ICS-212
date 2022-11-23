@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    llist* database = new llist("record.txt");
+    llist* database = new llist();
 
     cout << "The following program will allow for adding, removing, finding, and printing of record from a bank database." << endl;
 

@@ -45,6 +45,7 @@ extern int debugmode;
 llist::llist()
 {
     start = NULL;
+    readfile();
 }
 
 /*****************************************************************
@@ -138,7 +139,7 @@ int llist::readfile()
 
 int llist::writefile()
 {
-    ofstream File("records.txt", std::ifstream::out);
+    ofstream File("records.txt", std::ifstream::out | std::ifstream::in | std::ifstream::trunc);
     struct record* writeTarget, * next;
     int returnVal;
     writeTarget = start;
@@ -333,7 +334,7 @@ void llist::addRecord(int accountNumber, char name[], char address[])
 int llist::findRecord(int accountNumber)
 {
     struct record* temp;
-    int returnVal, tempNextAccNum;
+    int returnVal = 0, tempNextAccNum;
 
     temp = start;
 
@@ -357,7 +358,6 @@ int llist::findRecord(int accountNumber)
         }
         if (tempNextAccNum == accountNumber)
         {
-            returnVal = 0;
             while (temp != NULL && tempNextAccNum == accountNumber)
             {
                 cout << endl << temp->accountno << endl << temp->name << endl << temp->address << endl;
