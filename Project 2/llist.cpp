@@ -28,7 +28,11 @@
 
 using namespace std;
 
-extern int debugmode;
+#ifdef DEBUG
+    int debugmode = 1;
+#else
+    int debugmode = 0;
+#endif
 
 /*****************************************************************
 //
@@ -110,7 +114,7 @@ int llist::readfile()
         {
             File >> accountNumber;
             File >> name;
-            File >> address;
+            getaddressfromfile(address, 60, File);
             addRecord(accountNumber, name, address);
         }
         returnVal = 0;
@@ -146,12 +150,12 @@ int llist::writefile()
 
     if (File.is_open())
     {
-        while (writeTarget != NULL && next != NULL)
+        while (writeTarget != NULL)
         {
             next = writeTarget->next;
 
             File << writeTarget->accountno << endl;
-            File << writeTarget->name << endl;
+            File << writeTarget->name;
             File << writeTarget->address << "/f" << endl;
 
             writeTarget = next;
@@ -208,7 +212,7 @@ void llist::cleanup()
 //
 ****************************************************************/
 
-void getaddressfromfile(char addressArr[], int maxLen, std::ifstream& File)
+void llist::getaddressfromfile(char addressArr[], int maxLen, std::ifstream& File)
 {
     char tempArr[100];
     int currentLen = 0, whileLoop = 1;
@@ -251,7 +255,7 @@ void llist::addRecord(int accountNumber, char name[], char address[])
     struct record* temp, * tempNext, * tempNextNext, * uacc;
     int tempNextAccNum;
 
-    uacc = (struct record*)malloc(sizeof(struct record));
+    uacc = new struct record;
 
     if (debugmode == 1)
     {
@@ -293,26 +297,27 @@ void llist::addRecord(int accountNumber, char name[], char address[])
         }
         else
         {
+            cout << "Made it here" << endl;
             tempNextNext = tempNext->next;
             tempNextAccNum = tempNext->accountno;
 
-            while (tempNextNext != NULL && accountNumber > tempNextAccNum)
+            while (accountNumber < tempNextAccNum && tempNextNext != NULL)
             {
-                temp = tempNext;
-                tempNext = tempNextNext;
+                temp = temp->next;
+                tempNext = tempNext->next;
                 tempNextNext = tempNextNext->next;
                 tempNextAccNum = tempNext->accountno;
             }
 
-            if (tempNextNext == NULL && accountNumber > tempNextAccNum)
-            {
-                tempNext->next = uacc;
-                uacc->next = NULL;
-            }
-            else
+            if (accountNumber > tempNextAccNum)
             {
                 temp->next = uacc;
                 uacc->next = tempNext;
+            }
+            else
+            {
+                tempNext->next = uacc;
+                uacc->next = tempNextNext;
             }
         }
     }
@@ -360,7 +365,7 @@ int llist::findRecord(int accountNumber)
         {
             while (temp != NULL && tempNextAccNum == accountNumber)
             {
-                cout << endl << temp->accountno << endl << temp->name << endl << temp->address << endl;
+                cout << endl << temp->accountno << endl << temp->name << temp->address << endl << endl;
                 temp = temp->next;
                 if (temp != NULL)
                 {
@@ -402,7 +407,7 @@ void llist::printAllRecords()
 
     while (temp != NULL)
     {
-        cout << endl << temp->accountno << endl << temp->name << endl << temp->address << endl;
+        cout << endl << temp->accountno << endl << temp->name << temp->address << endl << endl;
         temp = temp->next;
     }
 }

@@ -19,16 +19,22 @@
 //   Textbook sections
 //
 ****************************************************************/
+
 #include "llist.h"
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
 void getaddress(char[], int);
 
-int debugmode = 0;
+#ifdef DEBUG
+    int debugmode = 1;
+#else
+    int debugmode = 0;
+#endif
 
 /*****************************************************************
 //
@@ -48,27 +54,9 @@ int debugmode = 0;
 int main(int argc, char* argv[])
 {
     int accountNum, whileLoop, accountLoop;
-    string tempString;
+    std::string tempString;
     char name[30], address[60], usrInput[10];
     whileLoop = 1;
-
-    if (argc == 2)
-    {
-        if (strcmp(argv[1], "debug") != 0)
-        {
-            cout << "Invalid input" << endl;
-            return -1;
-        }
-        else
-        {
-            debugmode = 1;
-        }
-    }
-    else if (argc > 2)
-    {
-        cout << "Invalid input" << endl;
-        return -1;
-    }
 
     llist* database = new llist();
 
@@ -87,7 +75,7 @@ int main(int argc, char* argv[])
         accountLoop = 1;
         cin >> usrInput;
 
-        if (strncmp(usrInput, "add", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        if (strncmp(usrInput, "add", strlen(usrInput)) == 0 && strlen(usrInput) > 0)
         {
             cout << "Enter account number:" << endl;
             while (accountLoop == 1)
@@ -111,19 +99,20 @@ int main(int argc, char* argv[])
                 }
             }
 
-            printf("Enter name:\n");
+            cout << "Enter name:" << endl;
             std::getline(std::cin, tempString);
+            tempString.push_back('\n');
             strcpy(name, tempString.c_str());
 
             getaddress(address, 60);
 
             database->addRecord(accountNum, name, address);
         }
-        else if (strncmp(usrInput, "printall", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "printall", strlen(usrInput)) == 0 && strlen(usrInput) > 0)
         {
             database->printAllRecords();
         }
-        else if (strncmp(usrInput, "find", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "find", strlen(usrInput)) == 0 && strlen(usrInput) > 0)
         {
             cout << "Enter account number:" << endl;
             while (accountLoop == 1)
@@ -152,7 +141,7 @@ int main(int argc, char* argv[])
                 cout << endl << "Record not found" << endl;
             }
         }
-        else if (strncmp(usrInput, "delete ", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "delete ", strlen(usrInput)) == 0 && strlen(usrInput) > 0)
         {
             cout << "Enter account number:" << endl;
             while (accountLoop == 1)
@@ -181,10 +170,10 @@ int main(int argc, char* argv[])
             }
             else
             {
-                cout << endl << "Record succesfully deleted" << endl;
+                cout << endl << "Record succesfully deleted" << endl << endl;
             }
         }
-        else if (strncmp(usrInput, "exit", strlen(usrInput) - 1) == 0 && strlen(usrInput) > 0)
+        else if (strncmp(usrInput, "exit", strlen(usrInput)) == 0 && strlen(usrInput) > 0)
         {
             database->~llist();
             whileLoop = 0;

@@ -19,6 +19,8 @@
 //   Textbook sections 
 //
 ****************************************************************/
+#ifndef LLIST_H
+#define LLIST_H
 
 #include "record.h"
 #include <fstream>
@@ -42,3 +44,5 @@ public:
     void printAllRecords();
     int deleteRecord(int);
 };
+
+#endif

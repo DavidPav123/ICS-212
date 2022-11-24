@@ -19,6 +19,8 @@
 //   Homework 3B website
 //
 ****************************************************************/
+#ifndef RECORD_H
+#define RECORD_H
 
 struct record
 {
@@ -27,3 +29,5 @@ struct record
     char               address[60];
     struct record*     next;
 };
+
+#endif
