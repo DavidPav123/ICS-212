@@ -2,13 +2,13 @@
 //
 //  NAME:        David Pavlicek
 //
-//  HOMEWORK:    3B
+//  HOMEWORK:    Project 2
 //
 //  CLASS:       ICS 212
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 24th, 2022
+//  DATE:        Novermber 24th, 2022
 //
 //  FILE:        record.h
 //

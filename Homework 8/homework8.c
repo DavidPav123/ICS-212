@@ -47,7 +47,7 @@ void makeheader(const unsigned char[], unsigned char[]);
 //
 ****************************************************************/
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int returnVal = 0;
     unsigned char tcpPacket[20], tcpResponse[20];
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 int readfile(const char filename[], unsigned char dataArr[])
 {
     int returnVal = 0;
-    FILE *fptr;
+    FILE* fptr;
 
     fptr = fopen(filename, "r");
 
@@ -153,7 +153,7 @@ int readfile(const char filename[], unsigned char dataArr[])
 int writefile(const char filename[], const unsigned char dataArr[])
 {
     int returnVal = 0;
-    FILE *fptr;
+    FILE* fptr;
 
     fptr = fopen(filename, "w+");
 
@@ -190,11 +190,11 @@ void printheader(const unsigned char dataArr[])
     printf("%s%u\n", "source port: ", (dataArr[1] * 256) + dataArr[0]);
     printf("%s%u\n", "destination port: ", (dataArr[3] * 256) + dataArr[2]);
     printf("%s%u\n", "sequence number: ",
-    (dataArr[7] * 16777216) + (dataArr[6] * 65536) + (dataArr[5] * 256) +
-    dataArr[4]);
+        (dataArr[7] * 16777216) + (dataArr[6] * 65536) + (dataArr[5] * 256) +
+        dataArr[4]);
     printf("%s%u\n", "acknowledgement number: ",
-    (dataArr[11] * 16777216) + (dataArr[10] * 65536) + (dataArr[9] * 256) +
-    dataArr[8]);
+        (dataArr[11] * 16777216) + (dataArr[10] * 65536) + (dataArr[9] * 256) +
+        dataArr[8]);
     n = dataArr[13];
     printf("Flags: ");
     for (i = 1 << 5; i > 0; i = i / 2)
@@ -263,9 +263,9 @@ void printheader(const unsigned char dataArr[])
 void makeheader(const unsigned char dataArr[], unsigned char newArr[])
 {
     unsigned int newSeq, n = dataArr[13],
-    sourcePort = (dataArr[1] * 256) + dataArr[0];
+        sourcePort = (dataArr[1] * 256) + dataArr[0];
     newSeq = (dataArr[7] * 16777216) + (dataArr[6] * 65536) + (dataArr[5] * 256) +
-    dataArr[4] + 1;
+        dataArr[4] + 1;
 
     newArr[0] = dataArr[2];
     newArr[1] = dataArr[3];
@@ -288,14 +288,14 @@ void makeheader(const unsigned char dataArr[], unsigned char newArr[])
 
     newArr[4] = newSeq % 256;
     newArr[5] =
-    ((newSeq - ((dataArr[7] * 16777216) + (dataArr[6] * 65536) + newArr[4])) /
-    256) % 256;
+        ((newSeq - ((dataArr[7] * 16777216) + (dataArr[6] * 65536) + newArr[4])) /
+            256) % 256;
     newArr[6] =
-    ((newSeq - ((dataArr[7] * 16777216) + (newArr[5] * 256) + newArr[4])) /
-    65536) % 256;
+        ((newSeq - ((dataArr[7] * 16777216) + (newArr[5] * 256) + newArr[4])) /
+            65536) % 256;
     newArr[7] =
-    ((newSeq - ((newArr[6] * 65536) + (newArr[5] * 256) + newArr[4])) /
-    16777216) % 256;
+        ((newSeq - ((newArr[6] * 65536) + (newArr[5] * 256) + newArr[4])) /
+            16777216) % 256;
 
     newArr[8] = dataArr[4];
     newArr[9] = dataArr[5];

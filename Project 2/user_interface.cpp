@@ -8,7 +8,7 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        November 16th, 2022
+//  DATE:        November 24th, 2022
 //
 //  FILE:        user_interface.c
 //
@@ -16,38 +16,31 @@
 //   Holds the code for allowing a user to interact with the database
 //
 //  REFERENCES:
-//   Textbook sections
+//   Textbook sections: 4, 10, 16 
+//   Websites:  https://www.cplusplus.com/reference/fstream/ifstream/ifstream/ and https://www.cplusplus.com/reference/fstream/ofstream/ofstream/
 //
 ****************************************************************/
 
-#include "llist.h"
 #include <cstring>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "llist.h"
 
 using namespace std;
 
 void getaddress(char[], int);
 
-#ifdef DEBUG
-    int debugmode = 1;
-#else
-    int debugmode = 0;
-#endif
-
 /*****************************************************************
 //
 //  Function name: main
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Accepts user input and calls the appropriate functions
 //
 //  Parameters:    argc (int) : number of command line arguments
 //                 argv (char**) : array of command line arguments
 //
-//  Return values: 0 : success
-//                -1 : failure
+//  Return values: 0 : main function exited successfully
 //
 ****************************************************************/
 
@@ -60,7 +53,8 @@ int main(int argc, char* argv[])
 
     llist* database = new llist();
 
-    cout << "The following program will allow for adding, removing, finding, and printing of record from a bank database." << endl;
+    cout << "The following program will allow for adding, removing, finding, "
+    "and printing of record from a bank database." << endl;
 
     while (whileLoop == 1)
     {
@@ -83,13 +77,15 @@ int main(int argc, char* argv[])
                 if (!(cin >> accountNum))
                 {
                     while (getchar() != '\n');
-                    cout << "Input was not a number. Please enter a positive Integer." << endl << endl;
+                    cout << "Input was not a number. Please enter a positive Integer."
+                    << endl << endl;
                 }
                 else
                 {
                     if (accountNum < 0)
                     {
-                        cout << "Input was not a positive number. Please enter a positive Integer." << endl << endl;
+                        cout << "Input was not a positive number. Please enter a positive Integer."
+                        << endl << endl;
                     }
                     else
                     {
@@ -120,13 +116,15 @@ int main(int argc, char* argv[])
                 if (!(cin >> accountNum))
                 {
                     while (getchar() != '\n');
-                    cout << "Input was not a number. Please enter a positive Integer." << endl << endl;
+                    cout << "Input was not a number. Please enter a positive Integer."
+                    << endl << endl;
                 }
                 else
                 {
                     if (accountNum < 0)
                     {
-                        cout << "Input was not a positive number. Please enter a positive Integer." << endl << endl;
+                        cout << "Input was not a positive number. Please enter a positive Integer."
+                        << endl << endl;
                     }
                     else
                     {
@@ -149,13 +147,15 @@ int main(int argc, char* argv[])
                 if (!(cin >> accountNum))
                 {
                     while (getchar() != '\n');
-                    cout << "Input was not a number. Please enter a positive Integer." << endl << endl;
+                    cout << "Input was not a number. Please enter a positive Integer."
+                    << endl << endl;
                 }
                 else
                 {
                     if (accountNum < 0)
                     {
-                        cout << "Input was not a positive number. Please enter a positive Integer." << endl << endl;
+                        cout << "Input was not a positive number. Please enter a positive Integer."
+                        << endl << endl;
                     }
                     else
                     {
@@ -205,11 +205,11 @@ void getaddress(char addressArr[], int maxLen)
     char tempArr[100];
     int currentLen = 0, whileLoop = 1;
 
-    if (debugmode == 1)
-    {
-        cout << "Name of called function: getaddress" << endl;
-        cout << "Parameters: char * addressArr and int maxLen, with maxLen value of " << maxLen << endl;
-    }
+    #ifdef DEBUG
+    cout << endl << "Name of called function: getaddress" << endl;
+    cout << "Parameters: char * addressArr and int maxLen, with maxLen value of "
+    << maxLen << endl << endl;
+    #endif
 
     cout << "Enter your address, when done enter /f:" << endl;
 

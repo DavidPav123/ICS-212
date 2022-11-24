@@ -8,7 +8,7 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        November 16th, 2022
+//  DATE:        November 24th, 2022
 //
 //  FILE:        llist.cpp
 //
@@ -16,23 +16,20 @@
 //   This file contains the function definitions for the llist class.
 //
 //  REFERENCES:
-//   Textbook sections
+//   Textbook sections: 4, 10, 16 
+//   Websites:  
+//      https://www.cplusplus.com/reference/fstream/ifstream/ifstream/ 
+//      https://www.cplusplus.com/reference/fstream/ofstream/ofstream/
 //
 ****************************************************************/
 
-#include "llist.h"
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include <cstdlib> 
+#include "llist.h"
 
 using namespace std;
-
-#ifdef DEBUG
-    int debugmode = 1;
-#else
-    int debugmode = 0;
-#endif
 
 /*****************************************************************
 //
@@ -48,6 +45,10 @@ using namespace std;
 
 llist::llist()
 {
+    #ifdef DEBUG
+    cout << endl << "llist constructor called" << endl;
+    cout << "Parameters: none" << endl << endl;
+    #endif
     start = NULL;
     readfile();
 }
@@ -66,6 +67,11 @@ llist::llist()
 
 llist::llist(char file[])
 {
+    #ifdef DEBUG
+    cout << endl << "llist constructor called" << endl;
+    cout << "Parameters: char file[]" << endl << endl;
+    #endif
+
     start = NULL;
     strcpy(filename, file);
     readfile();
@@ -85,6 +91,10 @@ llist::llist(char file[])
 
 llist::~llist()
 {
+    #ifdef DEBUG
+    cout << endl << "llist destructor called" << endl;
+    cout << "Parameters: none" << endl << endl;
+    #endif
     writefile();
     cleanup();
 }
@@ -97,8 +107,8 @@ llist::~llist()
 //
 //  Parameters:    none
 //
-//  Return values:  0 : success
-//                 -1 : failure
+//  Return values:  0 : File was read from successfully
+//                 -1 : File was unable to be read from
 //
 ****************************************************************/
 
@@ -107,6 +117,11 @@ int llist::readfile()
     int returnVal, accountNumber;
     char name[30], address[60];
     ifstream File("records.txt", std::ifstream::in);
+
+    #ifdef DEBUG
+    cout << endl << "Name of called function: readfile" << endl;
+    cout << "Parameters: none" << endl << endl;
+    #endif
 
     if (File.is_open())
     {
@@ -136,8 +151,8 @@ int llist::readfile()
 //
 //  Parameters:    none
 //
-//  Return values:  0 : success
-//                 -1 : failure
+//  Return values:  0 : File was written to successfully
+//                 -1 : File was unable to be written to
 //
 ****************************************************************/
 
@@ -147,6 +162,11 @@ int llist::writefile()
     struct record* writeTarget, * next;
     int returnVal;
     writeTarget = start;
+
+    #ifdef DEBUG
+    cout << endl << "Name of called function: writefile" << endl;
+    cout << "Parameters: none" << endl << endl;
+    #endif
 
     if (File.is_open())
     {
@@ -188,6 +208,11 @@ void llist::cleanup()
     struct record* cleanupTarget, * next;
     cleanupTarget = start;
 
+    #ifdef DEBUG
+    cout << endl << "Name of called function: cleanup" << endl;
+    cout << "Parameters: none" << endl << endl;
+    #endif
+
     while (cleanupTarget != NULL && next != NULL)
     {
         next = cleanupTarget->next;
@@ -217,6 +242,12 @@ void llist::getaddressfromfile(char addressArr[], int maxLen, std::ifstream& Fil
     char tempArr[100];
     int currentLen = 0, whileLoop = 1;
 
+    #ifdef DEBUG
+    cout << endl << "Name of called function: getaddressfromfile" << endl;
+    cout << "Parameters: char * addressArr, int maxLen, and std::ifstream& File, "
+    "with maxLen value of " << maxLen << endl << endl;
+    #endif
+
     while (currentLen < maxLen && whileLoop == 1)
     {
         File.get(tempArr[currentLen]);
@@ -233,18 +264,15 @@ void llist::getaddressfromfile(char addressArr[], int maxLen, std::ifstream& Fil
     strcpy(addressArr, tempArr);
 }
 
-
-
 /*****************************************************************
 //
 //  Function name: addRecord
 //
 //  DESCRIPTION:   Adds a record to the database
 //
-//  Parameters:    adressArr (char *) : stores a pointer to the
-//                                      array the address is store in
-//                 maxLen (int) : store the maximum number
-//                                characters a user can enter
+//  Parameters:    adress (char *) : the address of the record to be added
+//                 accountNumber (int) : the account number of the record to be added
+//                 name (char []) : the name of the record to be added
 //
 //  Return values:  void
 //
@@ -257,18 +285,17 @@ void llist::addRecord(int accountNumber, char name[], char address[])
 
     uacc = new struct record;
 
-    if (debugmode == 1)
-    {
-        cout << "Name of called function: addRecord" << endl;
-        cout << "Paramaters: struct record * database, int accountNumber, "
-            "char * name, and char * address, with values:" << endl;
-        cout << "accountNumber: ";
-        cout << accountNumber << endl;
-        cout << "name: ";
-        cout << name;
-        cout << "address: " << endl;
-        cout << address << endl << endl;
-    }
+    #ifdef DEBUG
+    cout << "Name of called function: addRecord" << endl;
+    cout << "Paramaters: struct record * database, int accountNumber, "
+    "char * name, and char * address, with values:" << endl << endl;
+    cout << "accountNumber: " << endl;
+    cout << accountNumber << endl;
+    cout << "name: " << endl;
+    cout << name;
+    cout << "address: " << endl;
+    cout << address << endl << endl;
+    #endif
 
     uacc->accountno = accountNumber;
     strcpy(uacc->name, name);
@@ -343,12 +370,11 @@ int llist::findRecord(int accountNumber)
 
     temp = start;
 
-    if (debugmode == 1)
-    {
-        cout << "Name of called function: findRecord" << endl;
-        cout << "Parameters: struct record * database and int accountNumber, "
-            "with accountNumber value: " << accountNumber << endl << endl;
-    }
+    #ifdef DEBUG
+    cout << "Name of called function: findRecord" << endl;
+    cout << "Parameters: struct record * database and int accountNumber, "
+    "with accountNumber value: " << accountNumber << endl << endl;
+    #endif
 
     if (start != NULL)
     {
@@ -365,7 +391,8 @@ int llist::findRecord(int accountNumber)
         {
             while (temp != NULL && tempNextAccNum == accountNumber)
             {
-                cout << endl << temp->accountno << endl << temp->name << temp->address << endl << endl;
+                cout << endl << temp->accountno << endl << temp->name << temp->address
+                << endl << endl;
                 temp = temp->next;
                 if (temp != NULL)
                 {
@@ -399,11 +426,10 @@ void llist::printAllRecords()
     struct record* temp;
     temp = start;
 
-    if (debugmode == 1)
-    {
-        cout << "Name of called function: printAllRecords" << endl;
-        cout << "Paramaters: none" << endl;
-    }
+    #ifdef DEBUG
+    cout << "Name of called function: printAllRecords" << endl;
+    cout << "Paramaters: none" << endl << endl;
+    #endif
 
     while (temp != NULL)
     {
@@ -430,17 +456,15 @@ int llist::deleteRecord(int accountNumber)
     struct record* temp, * tempNext;
     int tempNextAccNum, returnVal;
 
-    if (debugmode == 1)
-    {
-        cout << "Name of called function: deleteRecord" << endl;
-        cout << "Paramaters: struct record * database and int accountNumber, "
-            "with accountNumber value: " << accountNumber << endl << endl;
-    }
+    #ifdef DEBUG
+    cout << endl << "Name of called function: deleteRecord" << endl;
+    cout << "Paramaters: struct record * database and int accountNumber, "
+    "with accountNumber value: " << accountNumber << endl << endl;
+    #endif
 
     returnVal = -1;
     if (start != NULL)
     {
-
         temp = start;
         tempNext = temp->next;
         tempNextAccNum = temp->accountno;

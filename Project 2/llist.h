@@ -8,22 +8,24 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        November 16th, 2022
+//  DATE:        November 24th, 2022
 //
-//  FILE:        database.c
+//  FILE:        llist.h
 //
 //  DESCRIPTION:
-//   This file contains the function definitions for the llist class.
+//   This file contains the class definitions for the llist class.
 //
 //  REFERENCES:
-//   Textbook sections 
+//   Textbook sections: 4, 16 
+//   Websites:  https://www.cplusplus.com/reference/fstream/ifstream/ifstream/ and https://www.cplusplus.com/reference/fstream/ofstream/ofstream/
 //
 ****************************************************************/
+
 #ifndef LLIST_H
 #define LLIST_H
 
-#include "record.h"
 #include <fstream>
+#include "record.h"
 
 class llist
 {
