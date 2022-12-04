@@ -20,9 +20,8 @@
 //
 ****************************************************************/
 
-*** include necessary header files for this source file ***
-
-*** if you need, you can have function prototypes here ***
+#include <iostream>
+#include "Charmander.h"
 
 /*****************************************************************
 //
@@ -40,27 +39,53 @@
 //
 ****************************************************************/
 
-int main(int argc, char* argv[])
+Charmander::Charmander()
 {
-    ...
+    type = "Fire";
+    weight = 18.7;
+    std::cout << "Charmander Constructor" << std::endl;
 }
 
 /*****************************************************************
 //
-//  Function name: foo
+//  Function name: main
 //
-//  DESCRIPTION:   A template function
-//                 This function does not do anything.
-//                 Please describe your function correctly.
+//  DESCRIPTION:   Don't forget to describe what your main
+//                 function does.
 //
-//  Parameters:    bar (int) : Describe the meaning
+//  Parameters:    argc (int) : The number of elements in argv
+//                 argv (char*[]) : An array of arguments passed
+//                                  to the program.
 //
 //  Return values:  0 : some meaning
 //                 -1 : some meaning
 //
 ****************************************************************/
 
-int foo(int bar)
+Charmander::~Charmander()
 {
-    ...
+    std::cout << "Charmander Destructor" << std::endl;
+}
+
+/*****************************************************************
+//
+//  Function name: main
+//
+//  DESCRIPTION:   Don't forget to describe what your main
+//                 function does.
+//
+//  Parameters:    argc (int) : The number of elements in argv
+//                 argv (char*[]) : An array of arguments passed
+//                                  to the program.
+//
+//  Return values:  0 : some meaning
+//                 -1 : some meaning
+//
+****************************************************************/
+
+void Charmander::printData()
+{
+    std::cout << "Charmander" << std::endl;
+    std::cout << "Type: " << type << std::endl;
+    std::cout << "Weight: " << weight << std::endl;
 }

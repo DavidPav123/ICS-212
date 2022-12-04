@@ -34,7 +34,7 @@ protected:
 public:
     Pokemon();
     virtual ~Pokemon();
-    virtual void printData();
+    virtual void printData() = 0;
 };
 
 #endif

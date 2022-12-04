@@ -20,47 +20,13 @@
 //
 ****************************************************************/
 
-*** include necessary header files for this source file ***
+#include <iostream>
+#include "Pokemon.h"
 
-*** if you need, you can have function prototypes here ***
-
-/*****************************************************************
-//
-//  Function name: main
-//
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
-//
-//  Parameters:    argc (int) : The number of elements in argv
-//                 argv (char*[]) : An array of arguments passed
-//                                  to the program.
-//
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
-//
-****************************************************************/
-
-int main(int argc, char* argv[])
-{
-    ...
+Pokemon::Pokemon(){
+    std::cout << "Pokemon Constructor" << std::endl;
 }
 
-/*****************************************************************
-//
-//  Function name: foo
-//
-//  DESCRIPTION:   A template function
-//                 This function does not do anything.
-//                 Please describe your function correctly.
-//
-//  Parameters:    bar (int) : Describe the meaning
-//
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
-//
-****************************************************************/
-
-int foo(int bar)
-{
-    ...
+Pokemon::~Pokemon(){
+    std::cout << "Pokemon Destructor" << std::endl;
 }
