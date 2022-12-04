@@ -50,18 +50,21 @@ void checkPokedex(Pokemon* pokemon);
 int main(int argc, char* argv[])
 {
     Pokemon* pokemon[3];
-    int i;
+    long unsigned int i;
     pokemon[0] = new Squirtle();
     pokemon[1] = new Charmander();
     pokemon[2] = new Bulbasaur();
 
-    vector <string> nicknames = { "Squirt", "Charm", "Bulb" };
+    vector<string> nicknames;
+    nicknames.push_back("Squirt");
+    nicknames.push_back("Charm");
+    nicknames.push_back("Bulb");
 
-    map <string, Pokemon*> Pokedex = {
-        {"Squirt", pokemon[0]},
-        {"Charm", pokemon[1]},
-        {"Bulb", pokemon[2]}
-    };
+    map <string, Pokemon*> Pokedex;
+    for (i = 0; i < 3; i++)
+    {
+        Pokedex[nicknames[i]] = pokemon[i];
+    }
 
     for (i = 0; i < nicknames.size(); i++)
     {
