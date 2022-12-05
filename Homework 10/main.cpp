@@ -28,6 +28,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <string>
 #include "Bulbasaur.h"
 #include "Charmander.h"
 #include "Pokemon.h"
@@ -56,7 +57,7 @@ int main(int argc, char* argv[])
 {
     Pokemon* pokemon[3];
     long unsigned int i;
-    
+
     pokemon[0] = new Squirtle();
     pokemon[1] = new Charmander();
     pokemon[2] = new Bulbasaur();

@@ -30,7 +30,7 @@
 class Pokemon
 {
 protected:
-    std::string type; 
+    std::string type;
     float weight;
 
 public:

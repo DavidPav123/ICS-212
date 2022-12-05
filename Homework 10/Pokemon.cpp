@@ -35,7 +35,8 @@
 //
 ****************************************************************/
 
-Pokemon::Pokemon(){
+Pokemon::Pokemon()
+{
     std::cout << "Pokemon Constructor" << std::endl;
 }
 
@@ -51,6 +52,7 @@ Pokemon::Pokemon(){
 //
 ****************************************************************/
 
-Pokemon::~Pokemon(){
-    std::cout << "Pokemon Destructor" << std::endl<< std::endl;
+Pokemon::~Pokemon()
+{
+    std::cout << "Pokemon Destructor" << std::endl << std::endl;
 }
