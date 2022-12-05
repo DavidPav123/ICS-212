@@ -1,22 +1,22 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    10
 //
 //  CLASS:       ICS 212
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        December 4, 2022
 //
-//  FILE:        template.c
+//  FILE:        Charmander.cpp
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Holds the function definitions for the Charmander class.
 //
 //  REFERENCES:
-//   List references used here 
+//   Homework 10 webpage
 //
 ****************************************************************/
 
@@ -25,17 +25,13 @@
 
 /*****************************************************************
 //
-//  Function name: main
+//  Function name: Charmander::Charmander
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Constructor for the Charmander class.
 //
-//  Parameters:    argc (int) : The number of elements in argv
-//                 argv (char*[]) : An array of arguments passed
-//                                  to the program.
+//  Parameters:    none
 //
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
+//  Return values:  none
 //
 ****************************************************************/
 
@@ -43,22 +39,18 @@ Charmander::Charmander()
 {
     type = "Fire";
     weight = 18.7;
-    std::cout << "Charmander Constructor" << std::endl;
+    std::cout << "Charmander Constructor" << std::endl<< std::endl;
 }
 
 /*****************************************************************
 //
-//  Function name: main
+//  Function name: Charmander::~Charmander
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Destructor for the Charmander class.
 //
-//  Parameters:    argc (int) : The number of elements in argv
-//                 argv (char*[]) : An array of arguments passed
-//                                  to the program.
+//  Parameters:    none
 //
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
+//  Return values:  none
 //
 ****************************************************************/
 
@@ -69,17 +61,13 @@ Charmander::~Charmander()
 
 /*****************************************************************
 //
-//  Function name: main
+//  Function name: Charmander::printData
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Prints the data for the Charmander class.
 //
-//  Parameters:    argc (int) : The number of elements in argv
-//                 argv (char*[]) : An array of arguments passed
-//                                  to the program.
+//  Parameters:    none
 //
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
+//  Return values:  none
 //
 ****************************************************************/
 
@@ -87,5 +75,5 @@ void Charmander::printData()
 {
     std::cout << "Charmander" << std::endl;
     std::cout << "Type: " << type << std::endl;
-    std::cout << "Weight: " << weight << std::endl;
+    std::cout << "Weight: " << weight << std::endl << std::endl;
 }

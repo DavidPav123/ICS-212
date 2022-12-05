@@ -1,32 +1,56 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    10
 //
 //  CLASS:       ICS 212
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        December 4, 2022
 //
-//  FILE:        template.c
+//  FILE:        Pokemon.cpp
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Holds the function definitions for the Pokemon class.
 //
 //  REFERENCES:
-//   List references used here 
+//   Homework 10 webpage
 //
 ****************************************************************/
 
 #include <iostream>
 #include "Pokemon.h"
 
+/*****************************************************************
+//
+//  Function name: Pokemon::Pokemon
+//
+//  DESCRIPTION:   Constructor for the Pokemon class.
+//
+//  Parameters:    none
+//
+//  Return values:  none
+//
+****************************************************************/
+
 Pokemon::Pokemon(){
     std::cout << "Pokemon Constructor" << std::endl;
 }
 
+/*****************************************************************
+//
+//  Function name: Pokemon::~Pokemon
+//
+//  DESCRIPTION:   Destructor for the Pokemon class.
+//
+//  Parameters:    none
+//
+//  Return values:  none
+//
+****************************************************************/
+
 Pokemon::~Pokemon(){
-    std::cout << "Pokemon Destructor" << std::endl;
+    std::cout << "Pokemon Destructor" << std::endl<< std::endl;
 }

@@ -1,25 +1,31 @@
 /*****************************************************************
 //
-//  NAME:        Ravi Narayan
+//  NAME:        David Pavlicek
 //
-//  HOMEWORK:    1
+//  HOMEWORK:    10
 //
 //  CLASS:       ICS 212
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        December 4th 2022
 //
-//  FILE:        template.c
+//  FILE:        main.cpp
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Main file for Homework 10 that executes the creation of Pokemon objects
+//   and prints their data.
 //
 //  REFERENCES:
-//   List references used here
+//   Websites used:
+//      https://cplusplus.com/reference/vector/vector/vector/
+//      https://en.cppreference.com/w/cpp/container/vector
+//      https://en.cppreference.com/w/cpp/container/map
+//      http://www.cplusplus.com/reference/map/map/
 //
 ****************************************************************/
 
+#include <iostream>
 #include <vector>
 #include <map>
 #include "Bulbasaur.h"
@@ -35,15 +41,14 @@ void checkPokedex(Pokemon* pokemon);
 //
 //  Function name: main
 //
-//  DESCRIPTION:   Don't forget to describe what your main
-//                 function does.
+//  DESCRIPTION:   Executes the creation of Pokemon objects and 
+//                 prints their data.
 //
 //  Parameters:    argc (int) : The number of elements in argv
 //                 argv (char*[]) : An array of arguments passed
 //                                  to the program.
 //
-//  Return values:  0 : some meaning
-//                 -1 : some meaning
+//  Return values:  0 : exited successfully
 //
 ****************************************************************/
 
@@ -51,6 +56,7 @@ int main(int argc, char* argv[])
 {
     Pokemon* pokemon[3];
     long unsigned int i;
+    
     pokemon[0] = new Squirtle();
     pokemon[1] = new Charmander();
     pokemon[2] = new Bulbasaur();
@@ -68,6 +74,7 @@ int main(int argc, char* argv[])
 
     for (i = 0; i < nicknames.size(); i++)
     {
+        cout << "Calling Key: " << nicknames[i] << endl;
         checkPokedex(Pokedex[nicknames[i]]);
     }
 
@@ -75,15 +82,17 @@ int main(int argc, char* argv[])
     {
         delete pokemon[i];
     }
+
+    return 0;
 }
 
 /*****************************************************************
 //
 //  Function name: checkPokedex
 //
-//  DESCRIPTION:   Prints the name of the given pokemon
+//  DESCRIPTION:   Prints the data of a Pokemon object.
 //
-//  Parameters:    pokemon (Pokemon*) : The pokemons name to check
+//  Parameters:    pokemon (Pokemon*) : The pokemons object to print data of.
 //
 //  Return values:  none
 //

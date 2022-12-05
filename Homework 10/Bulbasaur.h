@@ -8,15 +8,17 @@
 //
 //  INSTRUCTOR:  Ravi Narayan
 //
-//  DATE:        September 3, 2112
+//  DATE:        December 4, 2022
 //
 //  FILE:        Bulbasaur.h
 //
 //  DESCRIPTION:
-//   Describe the file
+//   Holds the function prototypes for the Bulbasaur class.
 //
 //  REFERENCES:
-//   List references used here
+//   Webpages used:
+//      https://www.ibm.com/docs/en/zos/2.4.0?topic=only-abstract-classes-c
+//      https://www.ibm.com/docs/en/zos/2.4.0?topic=only-virtual-functions-c
 //
 ****************************************************************/
 
